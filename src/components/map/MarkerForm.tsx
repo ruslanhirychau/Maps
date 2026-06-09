@@ -54,13 +54,13 @@ export function MarkerForm({
 }) {
   return (
     <div className="text-toolbar">
-      <button className="tt-btn tt-circle" onClick={onCancel} title="Отмена">
+      <button className="tt-btn tt-circle" onClick={onCancel} title="Cancel">
         <X size={14} />
       </button>
       <input
         className="mf-input"
         autoFocus
-        placeholder="Заметка…"
+        placeholder="Note…"
         value={draft.title}
         onChange={(e) => onChange({ title: e.target.value })}
         onKeyDown={(e) => {
@@ -90,7 +90,7 @@ export function MarkerForm({
           />
         ))}
       </span>
-      <button className="tt-btn primary tt-circle" onClick={onDone} title="Готово">
+      <button className="tt-btn primary tt-circle" onClick={onDone} title="Done">
         <Check size={14} />
       </button>
     </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Globe, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useStore } from "../store";
-import { EVERYTHING_ID, INBOX_ID } from "../types";
+import { INBOX_ID } from "../types";
 
 interface SearchResult {
   id: string;
@@ -189,21 +189,6 @@ export function TopBar() {
       </button>
 
       <div className="topbar-tabs">
-        <button
-          className={activeWorkspaceId === EVERYTHING_ID ? "tab active" : "tab"}
-          style={{ ["--ws-color" as string]: "#4dabf7" }}
-          onClick={() =>
-            activeWorkspaceId === EVERYTHING_ID
-              ? fitAll()
-              : setActiveWorkspace(EVERYTHING_ID)
-          }
-        >
-          <span className="tab-icon">
-            <Globe size={16} />
-          </span>
-          <span className="tab-name">Everything</span>
-        </button>
-
         {tabs.map((ws) => (
           <button
             key={ws.id}

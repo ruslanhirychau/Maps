@@ -29,10 +29,7 @@ export interface Layer {
 
 import type { MapStyleId } from "./mapStyles";
 
-// Sentinel active id for the virtual "Everything" view (all workspaces at once).
-export const EVERYTHING_ID = "everything";
-
-// Default "Inbox" workspace — where features added from Everything land.
+// Default "Inbox" workspace — where features added from a folder view land.
 export const INBOX_ID = "ws-inbox";
 
 // Live aircraft demo workspace (OpenSky) — rendered from a live feed, not data.
@@ -47,14 +44,20 @@ export const RAIN_ID = "ws-rain";
 // Live ISS position (wheretheiss.at) — a single live point orbiting the globe.
 export const ISS_ID = "ws-iss";
 
-// Country choropleth (World Bank indicators joined to mapbox boundaries).
-export const WORLD_ID = "ws-world";
+// Live wildfires (NASA EONET) — active fire events worldwide.
+export const FIRE_ID = "ws-fires";
 
 // Live lightning strikes (Blitzortung WebSocket) — global real-time flashes.
 export const LIGHTNING_ID = "ws-lightning";
 
 // Meteorite landings (NASA, ~32k historical impact sites) — static scatter.
 export const METEORITE_ID = "ws-meteorites";
+
+// Submarine communications cables (TeleGeography) — the global undersea network.
+export const CABLE_ID = "ws-cables";
+
+// COVID-19 totals by country (disease.sh / JHU) — bubbles sized by cases.
+export const COVID_ID = "ws-covid";
 
 export interface Workspace {
   id: string;
@@ -79,6 +82,4 @@ export interface Workspace {
 export interface AppData {
   workspaces: Workspace[];
   activeWorkspaceId: string | null;
-  // Basemap used by the "Everything" view (it has no workspace of its own).
-  everythingStyle: MapStyleId;
 }

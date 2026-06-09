@@ -1,22 +1,22 @@
 import type { AppData } from "./types";
 import {
-  EVERYTHING_ID,
   INBOX_ID,
   AIRCRAFT_ID,
   SHIPS_ID,
   RAIN_ID,
   ISS_ID,
-  WORLD_ID,
+  FIRE_ID,
   LIGHTNING_ID,
   METEORITE_ID,
+  CABLE_ID,
+  COVID_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
-// live/data layers plus a few empty demo workspaces and one example folder.
+// live/data layers plus a couple of empty demo workspaces.
 export function seedData(): AppData {
   return {
-    activeWorkspaceId: EVERYTHING_ID,
-    everythingStyle: "standard",
+    activeWorkspaceId: METEORITE_ID,
     workspaces: [
       {
         id: INBOX_ID,
@@ -117,31 +117,45 @@ export function seedData(): AppData {
         ],
       },
       {
-        id: WORLD_ID,
-        name: "World Data",
-        icon: "🌍",
-        color: "#22a884",
+        id: FIRE_ID,
+        name: "Wildfires",
+        icon: "🔥",
+        color: "#fb923c",
         style: "dark-v11",
         pinned: true,
         marker: "circle",
-        center: [10, 30],
+        center: [10, 25],
         zoom: 1.6,
         layers: [
-          { id: "lyr-world", name: "Countries", color: "#22a884", visible: true, features: [] },
+          { id: "lyr-fires", name: "Active fires", color: "#fb923c", visible: true, features: [] },
         ],
       },
       {
-        id: "ws-food",
-        name: "Food",
-        icon: "🍔",
-        color: "#e8590c",
+        id: CABLE_ID,
+        name: "Submarine Cables",
+        icon: "🌐",
+        color: "#22d3ee",
         style: "dark-v11",
         pinned: true,
-        marker: "square",
-        center: [37.6173, 55.7558],
-        zoom: 12,
+        marker: "circle",
+        center: [0, 20],
+        zoom: 1.6,
         layers: [
-          { id: "lyr-food", name: "Places", color: "#e8590c", visible: true, features: [] },
+          { id: "lyr-cables", name: "Cables", color: "#22d3ee", visible: true, features: [] },
+        ],
+      },
+      {
+        id: COVID_ID,
+        name: "COVID-19",
+        icon: "🦠",
+        color: "#dc2626",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 25],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-covid", name: "Cases by country", color: "#dc2626", visible: true, features: [] },
         ],
       },
       {
@@ -171,20 +185,6 @@ export function seedData(): AppData {
         layers: [
           { id: "lyr-drone", name: "Text labels", color: "#1971c2", visible: true, features: [] },
         ],
-      },
-      {
-        // Example folder: aggregates member spaces into one view.
-        id: "folder-places",
-        name: "Places",
-        icon: "📁",
-        color: "#845ef7",
-        style: "dark-v11",
-        pinned: true,
-        marker: "circle",
-        members: ["ws-food"],
-        center: [20, 50],
-        zoom: 4,
-        layers: [],
       },
     ],
   };

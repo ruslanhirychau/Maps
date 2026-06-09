@@ -13,17 +13,18 @@ import { useAircraftLayer } from "./map/useAircraftLayer";
 import { useShipsLayer } from "./map/useShipsLayer";
 import { useLightningLayer } from "./map/useLightningLayer";
 import { useMeteoritesLayer } from "./map/useMeteoritesLayer";
+import { useFiresLayer } from "./map/useFiresLayer";
+import { useCablesLayer } from "./map/useCablesLayer";
+import { useCovidLayer } from "./map/useCovidLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
-import { useWorldData } from "./map/useWorldData";
-import { WorldDataPanel } from "./map/WorldDataPanel";
 import { useDrawShapes } from "./map/useDrawShapes";
 import { DrawTools } from "./map/DrawTools";
 import { UndoRedo } from "./map/UndoRedo";
 import { CenterPin, MarkerForm, type MarkerDraft } from "./map/MarkerForm";
 import { useDraftHistory } from "./map/useDraftHistory";
 import { useStore, selectActiveWorkspace } from "../store";
-import { styleUrl, isDarkStyle } from "../mapStyles";
+import { styleUrl, isDarkStyle, DEFAULT_STYLE } from "../mapStyles";
 import { markerGlyph } from "../markers";
 import { loadView, saveView } from "../storage";
 import {
@@ -38,7 +39,7 @@ import {
 import { MapStyleSwitcher } from "./MapStyleSwitcher";
 import { MapCompass } from "./MapCompass";
 import { FeaturePopup } from "./FeaturePopup";
-import { RAIN_ID, WORLD_ID, type Feature } from "../types";
+import { RAIN_ID, type Feature } from "../types";
 
 // In-progress inline text being typed directly on the map canvas. `id` set =
 // editing an existing label; unset = creating a new one.
@@ -272,6 +273,81 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
     },
   });
 
+  // Submarine cables (TeleGeography) — undersea network as coloured lines, each
+  // cable keeping its own colour from the dataset.
+  map.addSource("cables", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "cables",
+    type: "line",
+    source: "cables",
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: {
+      "line-color": ["coalesce", ["get", "color"], "#22d3ee"],
+      "line-width": ["interpolate", ["linear"], ["zoom"], 1, 0.8, 4, 1.5, 8, 3],
+      "line-opacity": 0.8,
+    },
+  });
+
+  // Live wildfires (NASA EONET) — glowing dots, warmer + bigger with fire size.
+  map.addSource("fires", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "fires",
+    type: "circle",
+    source: "fires",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "acres"], 0],
+        0, 4,
+        1000, 6,
+        50000, 10,
+        500000, 16,
+      ],
+      "circle-color": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "acres"], 0],
+        0, "#fde047",
+        5000, "#fb923c",
+        100000, "#ef4444",
+      ],
+      "circle-blur": 0.5,
+      "circle-opacity": 0.75,
+    },
+  });
+
+  // COVID-19 totals by country — bubbles sized by total cases (radius ~√cases so
+  // area tracks the count), tinted by case-fatality ratio (yellow → deep red).
+  map.addSource("covid", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "covid",
+    type: "circle",
+    source: "covid",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["sqrt", ["coalesce", ["get", "cases"], 0]],
+        0, 2,
+        3000, 8, // ~9M cases
+        9000, 24, // ~80M cases
+        27000, 55, // ~730M (global) — never reached per-country
+      ],
+      "circle-color": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "cfr"], 0],
+        0, "#fde047",
+        1.5, "#fb923c",
+        4, "#dc2626",
+      ],
+      "circle-opacity": 0.6,
+      "circle-stroke-color": "#7f1d1d",
+      "circle-stroke-width": 0.6,
+    },
+  });
+
   // ISS orbit ring — a great circle drawn as elevated dots (line-z-offset isn't
   // supported on globe, but symbol-z-offset is), so it floats at orbit altitude.
   map.addSource("iss-orbit", { type: "geojson", data: EMPTY });
@@ -423,7 +499,6 @@ export function MapView() {
   const workspace = useStore(selectActiveWorkspace);
   const workspaces = useStore((s) => s.workspaces);
   const activeWorkspaceId = useStore((s) => s.activeWorkspaceId);
-  const everythingStyle = useStore((s) => s.everythingStyle);
   const addFeature = useStore((s) => s.addFeature);
   const updateFeature = useStore((s) => s.updateFeature);
   const removeFeature = useStore((s) => s.removeFeature);
@@ -446,7 +521,7 @@ export function MapView() {
   const fitNonce = useStore((s) => s.fitNonce);
   const layout = useStore((s) => s.layout);
 
-  const desiredStyle = workspace ? styleUrl(workspace.style) : styleUrl(everythingStyle);
+  const desiredStyle = styleUrl(workspace ? workspace.style : DEFAULT_STYLE);
 
   // Keep current values in refs so handlers attached once stay up to date.
   const workspaceRef = useRef(workspace);
@@ -530,10 +605,7 @@ export function MapView() {
 
     // Runs on the first style load AND after every setStyle (basemap/theme change).
     map.on("style.load", () => {
-      addBaseLayers(
-        map,
-        isDarkStyle(workspaceRef.current?.style ?? useStore.getState().everythingStyle),
-      );
+      addBaseLayers(map, isDarkStyle(workspaceRef.current?.style ?? DEFAULT_STYLE));
       loadedRef.current = true;
       refreshData();
       setStyleVersion((v) => v + 1); // re-apply overlays (rain) after the layer exists
@@ -630,19 +702,19 @@ export function MapView() {
     // Hover tooltip for meteorite landings (name, year, mass, fall type).
     const fmtMass = (m: number) =>
       m < 1000
-        ? `${Math.round(m)} г`
+        ? `${Math.round(m)} g`
         : m < 1e6
-          ? `${(m / 1000).toFixed(1)} кг`
-          : `${(m / 1e6).toFixed(1)} т`;
+          ? `${(m / 1000).toFixed(1)} kg`
+          : `${(m / 1e6).toFixed(1)} t`;
     map.on("mousemove", "meteorites", (e) => {
       const f = e.features?.[0];
       if (!f) return;
       map.getCanvas().style.cursor = "pointer";
       const p = f.properties as { n?: string; m?: number; y?: number; f?: number };
       const rows = [
-        p.y ? `<div class="pp-row">Год&nbsp;${p.y}</div>` : "",
-        typeof p.m === "number" ? `<div class="pp-row">Масса&nbsp;${fmtMass(p.m)}</div>` : "",
-        `<div class="pp-row">${p.f === 1 ? "Наблюдалось падение" : "Найден"}</div>`,
+        p.y ? `<div class="pp-row">Year&nbsp;${p.y}</div>` : "",
+        typeof p.m === "number" ? `<div class="pp-row">Mass&nbsp;${fmtMass(p.m)}</div>` : "",
+        `<div class="pp-row">${p.f === 1 ? "Observed fall" : "Found"}</div>`,
       ].join("");
       planePopup
         .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
@@ -650,6 +722,77 @@ export function MapView() {
         .addTo(map);
     });
     map.on("mouseleave", "meteorites", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
+    // Hover tooltip for active wildfires (name, size, last detection date).
+    map.on("mousemove", "fires", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { title?: string; acres?: number; date?: string };
+      const rows = [
+        typeof p.acres === "number"
+          ? `<div class="pp-row">Area&nbsp;${Math.round(p.acres).toLocaleString()} acres</div>`
+          : "",
+        p.date
+          ? `<div class="pp-row">${new Date(p.date).toLocaleDateString()}</div>`
+          : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🔥 ${p.title || "Wildfire"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "fires", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
+    // Hover tooltip for submarine cables (cable name at the cursor).
+    map.on("mousemove", "cables", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { name?: string };
+      planePopup
+        .setLngLat(e.lngLat)
+        .setHTML(`<div class="pp-call">🌐 ${p.name || "Cable"}</div>`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "cables", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
+    // Hover tooltip for COVID-19 country totals (cases / deaths / recovered / CFR).
+    const fmtNum = (n: number) => Math.round(n).toLocaleString("en-US");
+    map.on("mousemove", "covid", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        country?: string;
+        cases?: number;
+        deaths?: number;
+        recovered?: number;
+        cfr?: number;
+      };
+      const rows = [
+        `<div class="pp-row">Cases&nbsp;${fmtNum(p.cases ?? 0)}</div>`,
+        `<div class="pp-row">Deaths&nbsp;${fmtNum(p.deaths ?? 0)}</div>`,
+        (p.recovered ?? 0) > 0
+          ? `<div class="pp-row">Recovered&nbsp;${fmtNum(p.recovered ?? 0)}</div>`
+          : "",
+        typeof p.cfr === "number" ? `<div class="pp-row">Fatality&nbsp;${p.cfr}%</div>` : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🦠 ${p.country || "—"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "covid", () => {
       map.getCanvas().style.cursor = "";
       planePopup.remove();
     });
@@ -746,6 +889,9 @@ export function MapView() {
   useShipsLayer(mapRef, activeWorkspaceId);
   useLightningLayer(mapRef, activeWorkspaceId);
   useMeteoritesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useFiresLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useCablesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useCovidLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);
@@ -757,13 +903,6 @@ export function MapView() {
     styleVersion,
     loadedRef,
   );
-
-  // Country choropleth (World Bank data) — owns indicator + legend.
-  const {
-    indicator: worldIndicator,
-    setIndicator: setWorldIndicator,
-    legend: worldLegend,
-  } = useWorldData(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Fly to a feature requested from the list (nonce re-triggers on repeat clicks).
   useEffect(() => {
@@ -867,13 +1006,6 @@ export function MapView() {
       )}
       {activeWorkspaceId === RAIN_ID && rainFrames.length > 0 && (
         <RainTimeline frames={rainFrames} index={rainIndex} onIndex={setRainIndex} />
-      )}
-      {activeWorkspaceId === WORLD_ID && (
-        <WorldDataPanel
-          indicator={worldIndicator}
-          onIndicator={setWorldIndicator}
-          legend={worldLegend}
-        />
       )}
       {markerDraft && map && (
         <>
@@ -1027,7 +1159,7 @@ function TextEditor({
         ref={inputRef}
         className="map-text-input"
         value={draft.text}
-        placeholder="Текст…"
+        placeholder="Text…"
         onChange={(e) => onChange({ text: e.target.value })}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -1063,7 +1195,7 @@ function TextEditor({
         style={{ left: rotPos.x, top: rotPos.y }}
         onPointerDown={startRotate}
         onMouseDown={keepFocus}
-        title="Вращать"
+        title="Rotate"
       >
         <RotateCw size={12} />
       </button>
@@ -1072,7 +1204,7 @@ function TextEditor({
           className="tt-btn tt-circle"
           onMouseDown={keepFocus}
           onClick={onCancel}
-          title="Отмена"
+          title="Cancel"
         >
           <X size={14} />
         </button>
@@ -1104,7 +1236,7 @@ function TextEditor({
                 : { zoomScale: true, anchorZoom: map.getZoom() },
             )
           }
-          title="Привязать размер к зуму (виден только при приближении)"
+          title="Pin size to zoom (only visible when zoomed in)"
         >
           <ScanSearch size={14} />
         </button>
@@ -1128,7 +1260,7 @@ function TextEditor({
           className="tt-btn primary tt-circle"
           onMouseDown={keepFocus}
           onClick={onCommit}
-          title="Готово"
+          title="Done"
         >
           <Check size={14} />
         </button>

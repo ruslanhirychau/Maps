@@ -24,7 +24,7 @@ export function UndoRedo({
         onMouseDown={(e) => e.preventDefault()}
         onClick={onUndo}
         disabled={!canUndo}
-        title="Отменить (⌘Z)"
+        title="Undo (⌘Z)"
       >
         <Undo2 size={16} />
       </button>
@@ -33,7 +33,7 @@ export function UndoRedo({
         onMouseDown={(e) => e.preventDefault()}
         onClick={onRedo}
         disabled={!canRedo}
-        title="Вернуть (⌘⇧Z)"
+        title="Redo (⌘⇧Z)"
       >
         <Redo2 size={16} />
       </button>

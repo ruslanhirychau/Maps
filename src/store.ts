@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { AppData, Feature, FeatureKind, Workspace } from "./types";
-import { EVERYTHING_ID, INBOX_ID } from "./types";
+import { INBOX_ID } from "./types";
 import type { MapStyleId } from "./mapStyles";
 import { loadData, loadView, saveData, saveView } from "./storage";
 
@@ -51,7 +51,6 @@ interface AppState extends AppData {
   // Drag-and-drop: move a workspace before `beforeId` (or to the group's end)
   // and set its pinned group. Reorders the single workspaces array.
   moveWorkspace: (draggedId: string, beforeId: string | null, pinned: boolean) => void;
-  setEverythingStyle: (style: MapStyleId) => void;
   addFeature: (
     lngLat: [number, number],
     kind: FeatureKind,
@@ -88,7 +87,6 @@ function persist(state: AppState) {
   saveData({
     workspaces: state.workspaces,
     activeWorkspaceId: state.activeWorkspaceId,
-    everythingStyle: state.everythingStyle,
   });
 }
 
@@ -204,16 +202,11 @@ export const useStore = create<AppState>((set, get) => {
     persist(get());
   },
 
-  setEverythingStyle: (style) => {
-    set({ everythingStyle: style });
-    persist(get());
-  },
-
   addFeature: (lngLat, kind, title, props) => {
     const { activeWorkspaceId, workspaces } = get();
-    // "Everything" / folders aggregate others — drop the note into Inbox instead.
+    // A folder aggregates other spaces — drop the note into Inbox instead.
     const active = workspaces.find((w) => w.id === activeWorkspaceId);
-    const isAggregate = activeWorkspaceId === EVERYTHING_ID || active?.members !== undefined;
+    const isAggregate = active?.members !== undefined;
     const targetId = isAggregate
       ? (workspaces.find((w) => w.id === INBOX_ID)?.id ?? workspaces[0]?.id ?? null)
       : activeWorkspaceId;
@@ -282,10 +275,9 @@ export const useStore = create<AppState>((set, get) => {
       commit(next);
       return;
     }
-    // New shape — route like addFeature (aggregates drop into Inbox).
+    // New shape — route like addFeature (folders drop into Inbox).
     const active = workspaces.find((w) => w.id === activeWorkspaceId);
-    const isAggregate =
-      activeWorkspaceId === EVERYTHING_ID || active?.members !== undefined;
+    const isAggregate = active?.members !== undefined;
     const targetId = isAggregate
       ? (workspaces.find((w) => w.id === INBOX_ID)?.id ?? workspaces[0]?.id ?? null)
       : activeWorkspaceId;

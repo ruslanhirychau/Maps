@@ -15,6 +15,9 @@ export const MAP_STYLES = [
 
 export type MapStyleId = (typeof MAP_STYLES)[number]["id"];
 
+// Fallback basemap when no workspace is active.
+export const DEFAULT_STYLE: MapStyleId = "dark-v11";
+
 export function styleUrl(id: string): string {
   return `mapbox://styles/mapbox/${id}`;
 }

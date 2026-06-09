@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Globe, Ellipsis, Plus, PanelLeft, Search, FolderPlus } from "lucide-react";
+import { Ellipsis, Plus, PanelLeft, Search, FolderPlus } from "lucide-react";
 import { useStore } from "../store";
 import { WorkspaceEditor } from "./WorkspaceEditor";
-import { EVERYTHING_ID, INBOX_ID, type Workspace } from "../types";
+import { INBOX_ID, type Workspace } from "../types";
 
 export function Sidebar() {
   const workspaces = useStore((s) => s.workspaces);
@@ -36,7 +36,6 @@ export function Sidebar() {
   const match = (w: Workspace) => !q || w.name.toLowerCase().includes(q);
   const pinned = visible.filter((w) => w.pinned && match(w));
   const others = visible.filter((w) => !w.pinned && match(w));
-  const showEverything = !q || "everything".includes(q);
 
   // While editing, the sidebar shrinks to an icon rail (labels fade out).
   // On close it expands immediately while the panel keeps sliding out.
@@ -51,7 +50,7 @@ export function Sidebar() {
   function openEditor(id: string) {
     setClosing(false);
     setActiveWorkspace(id);
-    setEditor(id === EVERYTHING_ID ? "everything" : id);
+    setEditor(id);
   }
 
   function row(ws: Workspace) {
@@ -150,35 +149,6 @@ export function Sidebar() {
         </div>
 
         <div className="ws-list">
-          {/* Virtual "Everything" view — all workspaces aggregated. */}
-          {showEverything && (
-            <div
-              className={
-                "wsrow everything" +
-                (activeWorkspaceId === EVERYTHING_ID ? " active" : "")
-              }
-              style={{ ["--ws-color" as string]: "#4dabf7" }}
-              onClick={() =>
-                railMode ? openEditor(EVERYTHING_ID) : setActiveWorkspace(EVERYTHING_ID)
-              }
-            >
-              <span className="wsrow-icon">
-                <Globe size={16} />
-              </span>
-              <span className="wsrow-name">Everything</span>
-              <button
-                className="wsrow-act"
-                title="Everything settings"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setEditor("everything");
-                }}
-              >
-                <Ellipsis size={15} />
-              </button>
-            </div>
-          )}
-
           <div className="ws-group" onDragOver={allowDrop} onDrop={groupDrop(true)}>
             {pinned.map(row)}
           </div>
@@ -213,7 +183,6 @@ export function Sidebar() {
           railed={layout === "sidebar"}
           closing={closing}
           workspace={editing}
-          everything={editor === "everything"}
           onClose={closeEditor}
         />
       )}

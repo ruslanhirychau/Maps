@@ -138,9 +138,111 @@ function aircraftPlugin(env: Record<string, string>): Plugin {
   };
 }
 
+// Dev-server endpoint /fires → normalized active-fire points (GeoJSON).
+// Uses NASA FIRMS (global VIIRS detections) when FIRMS_MAP_KEY is set, else falls
+// back to NASA EONET (keyless, but mostly US-tracked wildfires). Cached server-side.
+function firesPlugin(env: Record<string, string>): Plugin {
+  const KEY = env.FIRMS_MAP_KEY;
+  const MAX = 30000; // cap features so the payload stays reasonable
+  let cache: unknown = null;
+  let cacheAt = 0;
+  const TTL = 10 * 60 * 1000;
+
+  type Feat = { type: "Feature"; geometry: { type: "Point"; coordinates: [number, number] }; properties: Record<string, unknown> };
+  const fc = (features: Feat[]) => ({ type: "FeatureCollection", features });
+
+  async function fetchFirms() {
+    const r = await fetch(
+      `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${KEY}/VIIRS_SNPP_NRT/world/1`,
+    );
+    if (!r.ok) throw new Error("firms " + r.status);
+    const lines = (await r.text()).trim().split("\n");
+    if (lines.length < 2) return fc([]);
+    const cols = lines[0].split(",").map((c) => c.trim());
+    const iLat = cols.indexOf("latitude");
+    const iLon = cols.indexOf("longitude");
+    const iFrp = cols.indexOf("frp");
+    const iDate = cols.indexOf("acq_date");
+    const iDn = cols.indexOf("daynight");
+    if (iLat < 0 || iLon < 0) throw new Error("firms columns");
+    const rows = lines.slice(1);
+    const step = Math.max(1, Math.ceil(rows.length / MAX));
+    const out: Feat[] = [];
+    for (let i = 0; i < rows.length; i += step) {
+      const f = rows[i].split(",");
+      const lat = Number(f[iLat]);
+      const lon = Number(f[iLon]);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+      const frp = iFrp >= 0 ? Number(f[iFrp]) : NaN;
+      out.push({
+        type: "Feature",
+        geometry: { type: "Point", coordinates: [lon, lat] },
+        properties: {
+          mag: Number.isFinite(frp) ? Math.min(1, Math.max(0.05, frp / 100)) : 0.2,
+          label: "VIIRS fire",
+          info: Number.isFinite(frp) ? `FRP ${Math.round(frp)} MW` : "",
+          date: iDate >= 0 ? f[iDate] : "",
+        },
+      });
+    }
+    return fc(out);
+  }
+
+  async function fetchEonet() {
+    const r = await fetch(
+      "https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&limit=500",
+    );
+    if (!r.ok) throw new Error("eonet " + r.status);
+    const j = (await r.json()) as {
+      events?: Array<{ title: string; geometry?: Array<{ type: string; coordinates: [number, number]; magnitudeValue?: number; date?: string }> }>;
+    };
+    const out: Feat[] = [];
+    for (const e of j.events ?? []) {
+      const g = e.geometry?.[e.geometry.length - 1];
+      if (!g || g.type !== "Point") continue;
+      const [lon, lat] = g.coordinates;
+      if (typeof lon !== "number" || typeof lat !== "number") continue;
+      const acres = typeof g.magnitudeValue === "number" ? g.magnitudeValue : null;
+      out.push({
+        type: "Feature",
+        geometry: { type: "Point", coordinates: [lon, lat] },
+        properties: {
+          mag: acres != null ? Math.min(1, Math.max(0.1, acres / 50000)) : 0.3,
+          label: e.title,
+          info: acres != null ? `${Math.round(acres).toLocaleString()} acres` : "",
+          date: g.date ?? "",
+        },
+      });
+    }
+    return fc(out);
+  }
+
+  return {
+    name: "fires-proxy",
+    configureServer(server) {
+      server.middlewares.use("/fires", async (_req, res) => {
+        const send = (code: number, body: unknown) => {
+          res.statusCode = code;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify(body));
+        };
+        try {
+          if (!cache || Date.now() - cacheAt > TTL) {
+            cache = KEY ? await fetchFirms() : await fetchEonet();
+            cacheAt = Date.now();
+          }
+          send(200, cache);
+        } catch (e) {
+          send(502, { type: "FeatureCollection", features: [], error: String(e) });
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
-    plugins: [react(), aircraftPlugin(env)],
+    plugins: [react(), aircraftPlugin(env), firesPlugin(env)],
   };
 });

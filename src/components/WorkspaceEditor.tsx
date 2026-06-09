@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Globe } from "lucide-react";
 import { useStore, PALETTE } from "../store";
 import { MAP_STYLES, type MapStyleId } from "../mapStyles";
 import { MARKER_SHAPES } from "../markers";
@@ -7,7 +6,6 @@ import { INBOX_ID, type Workspace } from "../types";
 
 interface Props {
   workspace: Workspace | null; // null = create
-  everything?: boolean; // "Everything" settings: only the basemap
   railed?: boolean; // sits next to the collapsed icon rail
   closing?: boolean; // playing the exit animation
   onClose: () => void;
@@ -15,11 +13,9 @@ interface Props {
 
 const EMOJI = ["🗺️", "🍔", "✈️", "🚁", "⭐️", "📍", "🏔️", "🚗", "🏕️", "🌍", "🍕", "🏠"];
 
-// Side panel to create or edit a workspace (edits apply live), or to set the
-// "Everything" basemap. Closed with the Done button.
+// Side panel to create or edit a workspace (edits apply live). Closed with Done.
 export function WorkspaceEditor({
   workspace,
-  everything = false,
   railed = false,
   closing = false,
   onClose,
@@ -27,8 +23,6 @@ export function WorkspaceEditor({
   const addWorkspace = useStore((s) => s.addWorkspace);
   const updateWorkspace = useStore((s) => s.updateWorkspace);
   const removeWorkspace = useStore((s) => s.removeWorkspace);
-  const everythingStyle = useStore((s) => s.everythingStyle);
-  const setEverythingStyle = useStore((s) => s.setEverythingStyle);
   const allWorkspaces = useStore((s) => s.workspaces);
 
   // A folder aggregates other spaces (has a members list).
@@ -37,13 +31,11 @@ export function WorkspaceEditor({
 
   // Frozen on mount so the exit animation keeps showing edit fields even if the
   // workspace is deleted mid-close.
-  const [isEdit] = useState(workspace !== null && !everything);
+  const [isEdit] = useState(workspace !== null);
   const [name, setName] = useState(workspace?.name ?? "");
   const [icon, setIcon] = useState(workspace?.icon ?? "🗺️");
-  const [color, setColor] = useState(everything ? "#4dabf7" : (workspace?.color ?? PALETTE[0]));
-  const [style, setStyle] = useState<MapStyleId>(
-    everything ? everythingStyle : (workspace?.style ?? "dark-v11"),
-  );
+  const [color, setColor] = useState(workspace?.color ?? PALETTE[0]);
+  const [style, setStyle] = useState<MapStyleId>(workspace?.style ?? "dark-v11");
   const [marker, setMarker] = useState(workspace?.marker ?? "circle");
 
   // Apply a change live to the edited workspace.
@@ -69,8 +61,7 @@ export function WorkspaceEditor({
   };
   const onStyle = (v: MapStyleId) => {
     setStyle(v);
-    if (everything) setEverythingStyle(v);
-    else apply({ style: v });
+    apply({ style: v });
   };
   const toggleMember = (id: string) => {
     const next = members.includes(id) ? members.filter((x) => x !== id) : [...members, id];
@@ -79,14 +70,14 @@ export function WorkspaceEditor({
   };
 
   function done() {
-    // Create mode commits on Done; edit/everything already applied live.
-    if (!isEdit && !everything) {
+    // Create mode commits on Done; edits already applied live.
+    if (!isEdit) {
       addWorkspace({ name: name.trim() || "Untitled", icon, color, style, marker });
     }
     onClose();
   }
 
-  const title = everything ? "Everything" : isEdit ? name || "Untitled" : "New workspace";
+  const title = isEdit ? name || "Untitled" : "New workspace";
   const isShape = MARKER_SHAPES.some((m) => m.id === marker);
 
   return (
@@ -97,7 +88,7 @@ export function WorkspaceEditor({
       style={{ ["--accent" as string]: color }}
     >
       <header className="editor-head">
-        <span className="editor-icon">{everything ? <Globe size={18} /> : icon}</span>
+        <span className="editor-icon">{icon}</span>
         <span className="editor-title">{title}</span>
         <button className="editor-done" onClick={done}>
           Done
@@ -105,8 +96,7 @@ export function WorkspaceEditor({
       </header>
 
       <div className="editor-body">
-        {!everything && (
-          <>
+        <>
             <label className="field">
               <span>Name</span>
               <input
@@ -179,8 +169,7 @@ export function WorkspaceEditor({
                 </div>
               </div>
             )}
-          </>
-        )}
+        </>
 
         {isFolder && (
           <div className="field">

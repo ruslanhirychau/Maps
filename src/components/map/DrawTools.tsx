@@ -23,14 +23,14 @@ export function DrawTools({
       <button
         className={"dt-btn" + (active === "marker" ? " active" : "")}
         onClick={onMarker}
-        title="Поставить маркер"
+        title="Add marker"
       >
         <MapPin size={17} />
       </button>
       <button
         className={"dt-btn" + (active === "text" ? " active" : "")}
         onClick={onText}
-        title="Добавить текст"
+        title="Add text"
       >
         <Type size={17} />
       </button>
@@ -38,21 +38,21 @@ export function DrawTools({
       <button
         className={"dt-btn" + (active === "line" ? " active" : "")}
         onClick={onLine}
-        title="Нарисовать линию"
+        title="Draw line"
       >
         <Spline size={17} />
       </button>
       <button
         className={"dt-btn" + (active === "polygon" ? " active" : "")}
         onClick={onPolygon}
-        title="Нарисовать полигон"
+        title="Draw polygon"
       >
         <Hexagon size={17} />
       </button>
       {canDelete && (
         <>
           <span className="dt-sep" />
-          <button className="dt-btn" onClick={onDelete} title="Удалить выбранное">
+          <button className="dt-btn" onClick={onDelete} title="Delete selected">
             <Trash2 size={16} />
           </button>
         </>
