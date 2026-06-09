@@ -5,7 +5,7 @@ import { seedData } from "./seed";
 // Later the same interface (load/save) can be reimplemented on top of Supabase
 // without touching the rest of the code.
 
-const STORAGE_KEY = "maps-prototype:v35";
+const STORAGE_KEY = "maps-prototype:v36";
 
 export function loadData(): AppData {
   try {

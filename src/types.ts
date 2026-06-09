@@ -81,6 +81,9 @@ export const AIR_ID = "ws-air";
 // Nuclear weapon tests 1945–1998 (SIPRI) — coloured by country, sized by yield.
 export const NUKETEST_ID = "ws-nuketests";
 
+// CO2 emissions by country (Our World in Data) — a choropleth fill by country.
+export const CO2_ID = "ws-co2";
+
 export interface Workspace {
   id: string;
   name: string;

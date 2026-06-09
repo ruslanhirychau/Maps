@@ -17,6 +17,7 @@ import {
   UNESCO_ID,
   AIR_ID,
   NUKETEST_ID,
+  CO2_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -261,6 +262,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-nuketests", name: "Tests 1945–1998", color: "#ef4444", visible: true, features: [] },
+        ],
+      },
+      {
+        id: CO2_ID,
+        name: "CO₂ Emissions",
+        icon: "🏭",
+        color: "#fb923c",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 30],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-co2", name: "CO₂ by country", color: "#fb923c", visible: true, features: [] },
         ],
       },
     ],

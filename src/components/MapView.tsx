@@ -23,6 +23,7 @@ import { useTectonicsLayer } from "./map/useTectonicsLayer";
 import { useUnescoLayer } from "./map/useUnescoLayer";
 import { useAirLayer } from "./map/useAirLayer";
 import { useNukeTestsLayer } from "./map/useNukeTestsLayer";
+import { useCo2Layer } from "./map/useCo2Layer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -596,6 +597,48 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-stroke-width": 0.4,
     },
   });
+
+  // CO2 emissions by country (Our World in Data) — a choropleth. The fill is
+  // inserted beneath the basemap's labels so country/city names stay legible,
+  // shaded on a log scale (a handful of countries dominate global emissions).
+  const firstSymbol = map.getStyle().layers?.find((l) => l.type === "symbol")?.id;
+  map.addSource("co2", { type: "geojson", data: EMPTY });
+  map.addLayer(
+    {
+      id: "co2-fill",
+      type: "fill",
+      source: "co2",
+      paint: {
+        "fill-color": [
+          "case",
+          ["has", "co2"],
+          [
+            "interpolate",
+            ["linear"],
+            ["log10", ["max", ["coalesce", ["get", "co2"], 0.1], 0.1]],
+            0, "#fef9c3", // ~1 Mt
+            1, "#fde68a", // 10
+            2, "#fdba74", // 100
+            3, "#fb923c", // 1,000
+            4, "#ef4444", // 10,000
+            4.2, "#7f1d1d", // ~12,000 (China)
+          ],
+          "#3f3f46", // no data
+        ],
+        "fill-opacity": 0.75,
+      },
+    },
+    firstSymbol,
+  );
+  map.addLayer(
+    {
+      id: "co2-line",
+      type: "line",
+      source: "co2",
+      paint: { "line-color": "#0f172a", "line-width": 0.5, "line-opacity": 0.5 },
+    },
+    firstSymbol,
+  );
 
   // ISS orbit ring — a great circle drawn as elevated dots (line-z-offset isn't
   // supported on globe, but symbol-z-offset is), so it floats at orbit altitude.
@@ -1248,6 +1291,41 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for the CO2 choropleth (annual total + per-capita emissions).
+    map.on("mousemove", "co2-fill", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        co2?: number;
+        pc?: number;
+        year?: number;
+      };
+      const total =
+        typeof p.co2 === "number"
+          ? p.co2 >= 1000
+            ? `${(p.co2 / 1000).toFixed(2)} Gt`
+            : `${p.co2.toLocaleString("en-US")} Mt`
+          : null;
+      const rows = [
+        total
+          ? `<div class="pp-row">CO₂&nbsp;${total}${p.year ? ` (${p.year})` : ""}</div>`
+          : `<div class="pp-row">No data</div>`,
+        typeof p.pc === "number"
+          ? `<div class="pp-row">Per capita&nbsp;${p.pc.toFixed(1)} t</div>`
+          : "",
+      ].join("");
+      planePopup
+        .setLngLat(e.lngLat)
+        .setHTML(`<div class="pp-call">🏭 ${p.name || "—"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "co2-fill", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Hover tooltip for earthquakes (magnitude, place, date).
     map.on("mousemove", "quakes", (e) => {
       const f = e.features?.[0];
@@ -1422,6 +1500,7 @@ export function MapView() {
   useUnescoLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useAirLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useNukeTestsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useCo2Layer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);
