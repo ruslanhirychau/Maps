@@ -14,6 +14,7 @@ import {
   CRASH_ID,
   WRECK_ID,
   TECTONIC_ID,
+  UNESCO_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -216,6 +217,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-tectonics", name: "Plates · Quakes · Volcanoes", color: "#f97316", visible: true, features: [] },
+        ],
+      },
+      {
+        id: UNESCO_ID,
+        name: "UNESCO Sites",
+        icon: "🏛️",
+        color: "#eab308",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 30],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-unesco", name: "Heritage sites", color: "#eab308", visible: true, features: [] },
         ],
       },
     ],

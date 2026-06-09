@@ -72,6 +72,9 @@ export const WRECK_ID = "ws-wrecks";
 // (USGS) + Holocene volcanoes (Smithsonian), the "Ring of Fire" on one map.
 export const TECTONIC_ID = "ws-tectonics";
 
+// UNESCO World Heritage Sites (Wikidata) — dots coloured by category.
+export const UNESCO_ID = "ws-unesco";
+
 export interface Workspace {
   id: string;
   name: string;

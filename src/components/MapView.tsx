@@ -20,6 +20,7 @@ import { useNuclearLayer } from "./map/useNuclearLayer";
 import { useCrashesLayer } from "./map/useCrashesLayer";
 import { useWrecksLayer } from "./map/useWrecksLayer";
 import { useTectonicsLayer } from "./map/useTectonicsLayer";
+import { useUnescoLayer } from "./map/useUnescoLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -498,6 +499,28 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       ],
       "circle-stroke-width": 1.3,
       "circle-stroke-opacity": 0.85,
+    },
+  });
+
+  // UNESCO World Heritage Sites (Wikidata) — dots coloured by category:
+  // cultural = gold, natural = green, mixed = purple.
+  map.addSource("unesco", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "unesco",
+    type: "circle",
+    source: "unesco",
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.2, 4, 3.4, 8, 6, 12, 9],
+      "circle-color": [
+        "match",
+        ["get", "cat"],
+        "natural", "#22c55e",
+        "mixed", "#a855f7",
+        /* cultural */ "#eab308",
+      ],
+      "circle-opacity": 0.8,
+      "circle-stroke-color": "#1c1917",
+      "circle-stroke-width": 0.4,
     },
   });
 
@@ -1043,6 +1066,33 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for UNESCO sites (category, country).
+    const UNESCO_CAT: Record<string, string> = {
+      cultural: "Cultural",
+      natural: "Natural",
+      mixed: "Mixed",
+    };
+    map.on("mousemove", "unesco", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { name?: string; country?: string; cat?: string };
+      const meta = [p.cat ? UNESCO_CAT[p.cat] ?? p.cat : "", p.country]
+        .filter(Boolean)
+        .join(" · ");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(
+          `<div class="pp-call">🏛 ${p.name || "World Heritage Site"}</div>` +
+            (meta ? `<div class="pp-row">${meta}</div>` : ""),
+        )
+        .addTo(map);
+    });
+    map.on("mouseleave", "unesco", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Hover tooltip for earthquakes (magnitude, place, date).
     map.on("mousemove", "quakes", (e) => {
       const f = e.features?.[0];
@@ -1214,6 +1264,7 @@ export function MapView() {
   useCrashesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useWrecksLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useTectonicsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useUnescoLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);
