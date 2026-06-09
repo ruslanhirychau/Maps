@@ -418,19 +418,19 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
     },
   });
 
-  // Shipwrecks (Wikidata) — ~30k tiny teal dots; small when zoomed out so the
-  // dense coastal clusters read as a map of maritime history, growing on zoom.
+  // Shipwrecks (Wikidata, notable wrecks with a Wikipedia article) — teal dots
+  // marking historic wreck sites, growing on zoom.
   map.addSource("wrecks", { type: "geojson", data: EMPTY });
   map.addLayer({
     id: "wrecks",
     type: "circle",
     source: "wrecks",
     paint: {
-      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 1.3, 4, 2.2, 8, 4, 12, 7],
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.2, 4, 3.5, 8, 6, 12, 9],
       "circle-color": "#2dd4bf",
-      "circle-opacity": 0.6,
+      "circle-opacity": 0.75,
       "circle-stroke-color": "#042f2e",
-      "circle-stroke-width": 0.3,
+      "circle-stroke-width": 0.4,
     },
   });
 
@@ -953,14 +953,22 @@ export function MapView() {
       const f = e.features?.[0];
       if (!f) return;
       map.getCanvas().style.cursor = "pointer";
-      const p = f.properties as { name?: string; type?: string; country?: string };
+      const p = f.properties as {
+        name?: string;
+        type?: string;
+        country?: string;
+        deaths?: number;
+      };
       const meta = [p.type, p.country].filter(Boolean).join(" · ");
+      const rows = [
+        meta ? `<div class="pp-row">${meta}</div>` : "",
+        typeof p.deaths === "number"
+          ? `<div class="pp-row">Fatalities&nbsp;${p.deaths.toLocaleString("en-US")}</div>`
+          : "",
+      ].join("");
       planePopup
         .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
-        .setHTML(
-          `<div class="pp-call">⚓ ${p.name || "Shipwreck"}</div>` +
-            (meta ? `<div class="pp-row">${meta}</div>` : ""),
-        )
+        .setHTML(`<div class="pp-call">⚓ ${p.name || "Shipwreck"}</div>${rows}`)
         .addTo(map);
     });
     map.on("mouseleave", "wrecks", () => {
