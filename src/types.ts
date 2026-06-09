@@ -62,6 +62,9 @@ export const COVID_ID = "ws-covid";
 // Nuclear power plants worldwide (WRI Global Power Plant Database) — static.
 export const NUCLEAR_ID = "ws-nuclear";
 
+// Aviation accidents worldwide (Wikidata) — bubbles sized by fatalities.
+export const CRASH_ID = "ws-crashes";
+
 export interface Workspace {
   id: string;
   name: string;

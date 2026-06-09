@@ -11,6 +11,7 @@ import {
   CABLE_ID,
   COVID_ID,
   NUCLEAR_ID,
+  CRASH_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -174,17 +175,17 @@ export function seedData(): AppData {
         ],
       },
       {
-        id: "ws-crashes",
+        id: CRASH_ID,
         name: "Plane Crashes",
-        icon: "✈️",
-        color: "#c92a2a",
-        style: "satellite-streets-v12",
-        pinned: false,
-        marker: "diamond",
-        center: [10, 50],
-        zoom: 4,
+        icon: "🛩️",
+        color: "#ef4444",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 30],
+        zoom: 1.6,
         layers: [
-          { id: "lyr-crashes", name: "Incidents", color: "#c92a2a", visible: true, features: [] },
+          { id: "lyr-crashes", name: "Accidents", color: "#ef4444", visible: true, features: [] },
         ],
       },
       {

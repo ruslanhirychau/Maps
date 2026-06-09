@@ -17,6 +17,7 @@ import { useFiresLayer } from "./map/useFiresLayer";
 import { useCablesLayer } from "./map/useCablesLayer";
 import { useCovidLayer } from "./map/useCovidLayer";
 import { useNuclearLayer } from "./map/useNuclearLayer";
+import { useCrashesLayer } from "./map/useCrashesLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -380,6 +381,39 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-opacity": ["match", ["get", "status"], "planned", 0.5, 0.75],
       "circle-stroke-color": "#0f172a",
       "circle-stroke-width": 0.6,
+    },
+  });
+
+  // Aviation accidents (Wikidata) — red dots, bigger + brighter with the death
+  // toll. Crashes with no recorded fatalities still show as a small dim dot.
+  map.addSource("crashes", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "crashes",
+    type: "circle",
+    source: "crashes",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["sqrt", ["coalesce", ["get", "deaths"], 0]],
+        0, 2.5,
+        5, 5, // ~25 deaths
+        12, 9, // ~150 deaths
+        24, 16, // ~580 (deadliest)
+      ],
+      "circle-color": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "deaths"], 0],
+        0, "#fca5a5",
+        50, "#ef4444",
+        200, "#b91c1c",
+        500, "#7f1d1d",
+      ],
+      "circle-blur": 0.35,
+      "circle-opacity": 0.72,
+      "circle-stroke-color": "#450a0a",
+      "circle-stroke-width": 0.5,
     },
   });
 
@@ -869,6 +903,34 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for aviation accidents (operator, year, fatalities).
+    map.on("mousemove", "crashes", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        op?: string;
+        deaths?: number;
+        year?: number;
+      };
+      const meta = [p.op, p.year].filter(Boolean).join(" · ");
+      const rows = [
+        meta ? `<div class="pp-row">${meta}</div>` : "",
+        typeof p.deaths === "number"
+          ? `<div class="pp-row">Fatalities&nbsp;${p.deaths.toLocaleString("en-US")}</div>`
+          : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🛩 ${p.name || "Aviation accident"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "crashes", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Close the feature popup when the user pans/zooms the map.
     const dismiss = () => {
       setSelectedRef.current(null);
@@ -965,6 +1027,7 @@ export function MapView() {
   useCablesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useCovidLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useNuclearLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useCrashesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);
