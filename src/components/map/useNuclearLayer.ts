@@ -3,10 +3,10 @@ import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { NUCLEAR_ID } from "../../types";
 import { EMPTY } from "./shared";
 
-// Nuclear power plants worldwide (WRI Global Power Plant Database). Bundled as a
-// static asset — a FeatureCollection of plant points carrying name / country /
-// capacity (MW) / commissioning year / owner. Loaded once while the workspace
-// is active.
+// Nuclear power plants worldwide (Wikidata). Bundled as a static asset — a
+// FeatureCollection of plant points carrying name / country / capacity (MW) and
+// a status (operating / shutdown / construction / planned / unknown). Loaded
+// once while the workspace is active.
 export function useNuclearLayer(
   mapRef: RefObject<MbMap | null>,
   activeWorkspaceId: string | null,

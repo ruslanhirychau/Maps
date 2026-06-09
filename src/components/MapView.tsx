@@ -349,7 +349,9 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
     },
   });
 
-  // Nuclear power plants (WRI) — green glowing dots, bigger with capacity (MW).
+  // Nuclear power plants (Wikidata) — dots coloured by status (green = operating,
+  // grey = shut down, amber = under construction, blue = planned, dim green =
+  // unknown), sized by capacity (MW) where known.
   map.addSource("nuclear", { type: "geojson", data: EMPTY });
   map.addLayer({
     id: "nuclear",
@@ -359,16 +361,24 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-radius": [
         "interpolate",
         ["linear"],
-        ["sqrt", ["coalesce", ["get", "mw"], 0]],
+        ["sqrt", ["coalesce", ["get", "mw"], 100]], // default ~size for unknown capacity
         0, 3,
         30, 6, // ~900 MW
         70, 11, // ~5 GW
         90, 16, // ~8 GW (largest)
       ],
-      "circle-color": "#4ade80",
-      "circle-blur": 0.4,
-      "circle-opacity": 0.7,
-      "circle-stroke-color": "#14532d",
+      "circle-color": [
+        "match",
+        ["get", "status"],
+        "operating", "#4ade80",
+        "shutdown", "#9ca3af",
+        "construction", "#fbbf24",
+        "planned", "#60a5fa",
+        /* unknown */ "#15803d",
+      ],
+      "circle-blur": 0.3,
+      "circle-opacity": ["match", ["get", "status"], "planned", 0.5, 0.75],
+      "circle-stroke-color": "#0f172a",
       "circle-stroke-width": 0.6,
     },
   });
@@ -831,16 +841,23 @@ export function MapView() {
         name?: string;
         country?: string;
         mw?: number;
-        year?: number;
-        owner?: string;
+        status?: string;
+      };
+      const STATUS_LABEL: Record<string, string> = {
+        operating: "Operating",
+        shutdown: "Shut down",
+        construction: "Under construction",
+        planned: "Planned",
+        unknown: "Status unknown",
       };
       const rows = [
+        p.status
+          ? `<div class="pp-row">${STATUS_LABEL[p.status] ?? p.status}</div>`
+          : "",
         typeof p.mw === "number"
           ? `<div class="pp-row">Capacity&nbsp;${p.mw.toLocaleString("en-US")} MW</div>`
           : "",
         p.country ? `<div class="pp-row">${p.country}</div>` : "",
-        p.year ? `<div class="pp-row">Commissioned&nbsp;${p.year}</div>` : "",
-        p.owner ? `<div class="pp-row">${p.owner}</div>` : "",
       ].join("");
       planePopup
         .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
