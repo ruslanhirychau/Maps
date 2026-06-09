@@ -21,6 +21,7 @@ import { useCrashesLayer } from "./map/useCrashesLayer";
 import { useWrecksLayer } from "./map/useWrecksLayer";
 import { useTectonicsLayer } from "./map/useTectonicsLayer";
 import { useUnescoLayer } from "./map/useUnescoLayer";
+import { useAirLayer } from "./map/useAirLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -521,6 +522,41 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-opacity": 0.8,
       "circle-stroke-color": "#1c1917",
       "circle-stroke-width": 0.4,
+    },
+  });
+
+  // Air quality by city (Open-Meteo) — bubbles tinted by the European AQI band
+  // (green = good → purple = extremely poor), sized by PM2.5 concentration.
+  map.addSource("air", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "air",
+    type: "circle",
+    source: "air",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["sqrt", ["coalesce", ["get", "pm25"], 0]],
+        0, 5,
+        5, 8, // ~25 µg/m³
+        10, 13, // ~100 µg/m³
+        16, 20, // ~250 µg/m³
+      ],
+      "circle-color": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "aqi"], 0],
+        0, "#22c55e",
+        20, "#a3e635",
+        40, "#facc15",
+        60, "#fb923c",
+        80, "#ef4444",
+        100, "#7e22ce",
+      ],
+      "circle-blur": 0.3,
+      "circle-opacity": 0.65,
+      "circle-stroke-color": "#0f172a",
+      "circle-stroke-width": 0.5,
     },
   });
 
@@ -1093,6 +1129,47 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for air quality (PM2.5 + European AQI band).
+    const aqiBand = (a: number) =>
+      a <= 20
+        ? "Good"
+        : a <= 40
+          ? "Fair"
+          : a <= 60
+            ? "Moderate"
+            : a <= 80
+              ? "Poor"
+              : a <= 100
+                ? "Very poor"
+                : "Extremely poor";
+    map.on("mousemove", "air", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        country?: string;
+        aqi?: number;
+        pm25?: number;
+      };
+      const rows = [
+        typeof p.aqi === "number"
+          ? `<div class="pp-row">AQI&nbsp;${Math.round(p.aqi)} · ${aqiBand(p.aqi)}</div>`
+          : "",
+        typeof p.pm25 === "number"
+          ? `<div class="pp-row">PM2.5&nbsp;${p.pm25.toFixed(1)} µg/m³</div>`
+          : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🌫 ${p.name || "—"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "air", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Hover tooltip for earthquakes (magnitude, place, date).
     map.on("mousemove", "quakes", (e) => {
       const f = e.features?.[0];
@@ -1265,6 +1342,7 @@ export function MapView() {
   useWrecksLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useTectonicsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useUnescoLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useAirLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);

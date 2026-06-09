@@ -15,6 +15,7 @@ import {
   WRECK_ID,
   TECTONIC_ID,
   UNESCO_ID,
+  AIR_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -231,6 +232,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-unesco", name: "Heritage sites", color: "#eab308", visible: true, features: [] },
+        ],
+      },
+      {
+        id: AIR_ID,
+        name: "Air Quality",
+        icon: "🌫️",
+        color: "#facc15",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 30],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-air", name: "PM2.5 by city", color: "#facc15", visible: true, features: [] },
         ],
       },
     ],

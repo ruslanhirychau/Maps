@@ -75,6 +75,9 @@ export const TECTONIC_ID = "ws-tectonics";
 // UNESCO World Heritage Sites (Wikidata) — dots coloured by category.
 export const UNESCO_ID = "ws-unesco";
 
+// Air quality by major city (Open-Meteo) — live PM2.5 / European AQI bubbles.
+export const AIR_ID = "ws-air";
+
 export interface Workspace {
   id: string;
   name: string;
