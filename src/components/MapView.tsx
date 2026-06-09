@@ -16,6 +16,7 @@ import { useMeteoritesLayer } from "./map/useMeteoritesLayer";
 import { useFiresLayer } from "./map/useFiresLayer";
 import { useCablesLayer } from "./map/useCablesLayer";
 import { useCovidLayer } from "./map/useCovidLayer";
+import { useNuclearLayer } from "./map/useNuclearLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -344,6 +345,30 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       ],
       "circle-opacity": 0.6,
       "circle-stroke-color": "#7f1d1d",
+      "circle-stroke-width": 0.6,
+    },
+  });
+
+  // Nuclear power plants (WRI) — green glowing dots, bigger with capacity (MW).
+  map.addSource("nuclear", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "nuclear",
+    type: "circle",
+    source: "nuclear",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["sqrt", ["coalesce", ["get", "mw"], 0]],
+        0, 3,
+        30, 6, // ~900 MW
+        70, 11, // ~5 GW
+        90, 16, // ~8 GW (largest)
+      ],
+      "circle-color": "#4ade80",
+      "circle-blur": 0.4,
+      "circle-opacity": 0.7,
+      "circle-stroke-color": "#14532d",
       "circle-stroke-width": 0.6,
     },
   });
@@ -797,6 +822,36 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for nuclear power plants (capacity, year, country, owner).
+    map.on("mousemove", "nuclear", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        country?: string;
+        mw?: number;
+        year?: number;
+        owner?: string;
+      };
+      const rows = [
+        typeof p.mw === "number"
+          ? `<div class="pp-row">Capacity&nbsp;${p.mw.toLocaleString("en-US")} MW</div>`
+          : "",
+        p.country ? `<div class="pp-row">${p.country}</div>` : "",
+        p.year ? `<div class="pp-row">Commissioned&nbsp;${p.year}</div>` : "",
+        p.owner ? `<div class="pp-row">${p.owner}</div>` : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">☢ ${p.name || "Nuclear plant"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "nuclear", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Close the feature popup when the user pans/zooms the map.
     const dismiss = () => {
       setSelectedRef.current(null);
@@ -892,6 +947,7 @@ export function MapView() {
   useFiresLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useCablesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useCovidLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useNuclearLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);

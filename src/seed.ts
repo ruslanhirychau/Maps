@@ -10,6 +10,7 @@ import {
   METEORITE_ID,
   CABLE_ID,
   COVID_ID,
+  NUCLEAR_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -156,6 +157,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-covid", name: "Cases by country", color: "#dc2626", visible: true, features: [] },
+        ],
+      },
+      {
+        id: NUCLEAR_ID,
+        name: "Nuclear Plants",
+        icon: "☢️",
+        color: "#4ade80",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [10, 30],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-nuclear", name: "Reactors", color: "#4ade80", visible: true, features: [] },
         ],
       },
       {

@@ -59,6 +59,9 @@ export const CABLE_ID = "ws-cables";
 // COVID-19 totals by country (disease.sh / JHU) — bubbles sized by cases.
 export const COVID_ID = "ws-covid";
 
+// Nuclear power plants worldwide (WRI Global Power Plant Database) — static.
+export const NUCLEAR_ID = "ws-nuclear";
+
 export interface Workspace {
   id: string;
   name: string;
