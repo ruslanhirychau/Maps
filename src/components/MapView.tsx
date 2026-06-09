@@ -18,6 +18,7 @@ import { useCablesLayer } from "./map/useCablesLayer";
 import { useCovidLayer } from "./map/useCovidLayer";
 import { useNuclearLayer } from "./map/useNuclearLayer";
 import { useCrashesLayer } from "./map/useCrashesLayer";
+import { useWrecksLayer } from "./map/useWrecksLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -414,6 +415,22 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-opacity": 0.72,
       "circle-stroke-color": "#450a0a",
       "circle-stroke-width": 0.5,
+    },
+  });
+
+  // Shipwrecks (Wikidata) — ~30k tiny teal dots; small when zoomed out so the
+  // dense coastal clusters read as a map of maritime history, growing on zoom.
+  map.addSource("wrecks", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "wrecks",
+    type: "circle",
+    source: "wrecks",
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 1.3, 4, 2.2, 8, 4, 12, 7],
+      "circle-color": "#2dd4bf",
+      "circle-opacity": 0.6,
+      "circle-stroke-color": "#042f2e",
+      "circle-stroke-width": 0.3,
     },
   });
 
@@ -931,6 +948,26 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for shipwrecks (vessel type, country).
+    map.on("mousemove", "wrecks", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { name?: string; type?: string; country?: string };
+      const meta = [p.type, p.country].filter(Boolean).join(" · ");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(
+          `<div class="pp-call">⚓ ${p.name || "Shipwreck"}</div>` +
+            (meta ? `<div class="pp-row">${meta}</div>` : ""),
+        )
+        .addTo(map);
+    });
+    map.on("mouseleave", "wrecks", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Close the feature popup when the user pans/zooms the map.
     const dismiss = () => {
       setSelectedRef.current(null);
@@ -1028,6 +1065,7 @@ export function MapView() {
   useCovidLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useNuclearLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useCrashesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useWrecksLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);

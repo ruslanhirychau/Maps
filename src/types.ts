@@ -65,6 +65,9 @@ export const NUCLEAR_ID = "ws-nuclear";
 // Aviation accidents worldwide (Wikidata) — bubbles sized by fatalities.
 export const CRASH_ID = "ws-crashes";
 
+// Shipwrecks worldwide (Wikidata, ~30k geolocated wreck sites) — static scatter.
+export const WRECK_ID = "ws-wrecks";
+
 export interface Workspace {
   id: string;
   name: string;

@@ -12,6 +12,7 @@ import {
   COVID_ID,
   NUCLEAR_ID,
   CRASH_ID,
+  WRECK_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -186,6 +187,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-crashes", name: "Accidents", color: "#ef4444", visible: true, features: [] },
+        ],
+      },
+      {
+        id: WRECK_ID,
+        name: "Shipwrecks",
+        icon: "⚓",
+        color: "#2dd4bf",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [0, 30],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-wrecks", name: "Wreck sites", color: "#2dd4bf", visible: true, features: [] },
         ],
       },
     ],
