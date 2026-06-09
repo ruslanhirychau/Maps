@@ -188,20 +188,6 @@ export function seedData(): AppData {
           { id: "lyr-crashes", name: "Accidents", color: "#ef4444", visible: true, features: [] },
         ],
       },
-      {
-        id: "ws-drone",
-        name: "Drone Notes",
-        icon: "🚁",
-        color: "#1971c2",
-        style: "satellite-streets-v12",
-        pinned: false,
-        marker: "pin",
-        center: [30.5234, 50.4501],
-        zoom: 13,
-        layers: [
-          { id: "lyr-drone", name: "Text labels", color: "#1971c2", visible: true, features: [] },
-        ],
-      },
     ],
   };
 }
