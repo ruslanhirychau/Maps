@@ -22,6 +22,7 @@ import { useWrecksLayer } from "./map/useWrecksLayer";
 import { useTectonicsLayer } from "./map/useTectonicsLayer";
 import { useUnescoLayer } from "./map/useUnescoLayer";
 import { useAirLayer } from "./map/useAirLayer";
+import { useNukeTestsLayer } from "./map/useNukeTestsLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -557,6 +558,42 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-opacity": 0.65,
       "circle-stroke-color": "#0f172a",
       "circle-stroke-width": 0.5,
+    },
+  });
+
+  // Nuclear weapon tests 1945–1998 (SIPRI) — coloured by testing country,
+  // sized by yield (kt). The five declared powers plus India & Pakistan.
+  map.addSource("nuketests", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "nuketests",
+    type: "circle",
+    source: "nuketests",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "kt"], 0],
+        0, 2.5,
+        20, 5,
+        1000, 11,
+        50000, 22,
+      ],
+      "circle-color": [
+        "match",
+        ["get", "country"],
+        "USA", "#3b82f6",
+        "USSR", "#ef4444",
+        "FRANCE", "#a855f7",
+        "UK", "#22c55e",
+        "CHINA", "#eab308",
+        "INDIA", "#f97316",
+        "PAKIST", "#14b8a6",
+        /* other */ "#9ca3af",
+      ],
+      "circle-blur": 0.25,
+      "circle-opacity": 0.6,
+      "circle-stroke-color": "#1c1917",
+      "circle-stroke-width": 0.4,
     },
   });
 
@@ -1170,6 +1207,47 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for nuclear tests (country, year, yield, deployment type).
+    const NUKE_COUNTRY: Record<string, string> = {
+      USA: "United States",
+      USSR: "Soviet Union",
+      FRANCE: "France",
+      UK: "United Kingdom",
+      CHINA: "China",
+      INDIA: "India",
+      PAKIST: "Pakistan",
+    };
+    const fmtKt = (kt: number) =>
+      kt >= 1000 ? `${(kt / 1000).toLocaleString("en-US")} Mt` : `${kt} kt`;
+    map.on("mousemove", "nuketests", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        country?: string;
+        year?: number;
+        kt?: number;
+        type?: string;
+      };
+      const head = [p.country ? NUKE_COUNTRY[p.country] ?? p.country : "", p.year]
+        .filter(Boolean)
+        .join(" · ");
+      const rows = [
+        head ? `<div class="pp-row">${head}</div>` : "",
+        typeof p.kt === "number" ? `<div class="pp-row">Yield&nbsp;${fmtKt(p.kt)}</div>` : "",
+        p.type ? `<div class="pp-row">${p.type}</div>` : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">☢ ${p.name || "Nuclear test"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "nuketests", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Hover tooltip for earthquakes (magnitude, place, date).
     map.on("mousemove", "quakes", (e) => {
       const f = e.features?.[0];
@@ -1343,6 +1421,7 @@ export function MapView() {
   useTectonicsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useUnescoLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useAirLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useNukeTestsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);

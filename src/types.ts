@@ -78,6 +78,9 @@ export const UNESCO_ID = "ws-unesco";
 // Air quality by major city (Open-Meteo) — live PM2.5 / European AQI bubbles.
 export const AIR_ID = "ws-air";
 
+// Nuclear weapon tests 1945–1998 (SIPRI) — coloured by country, sized by yield.
+export const NUKETEST_ID = "ws-nuketests";
+
 export interface Workspace {
   id: string;
   name: string;
