@@ -19,6 +19,7 @@ import { useCovidLayer } from "./map/useCovidLayer";
 import { useNuclearLayer } from "./map/useNuclearLayer";
 import { useCrashesLayer } from "./map/useCrashesLayer";
 import { useWrecksLayer } from "./map/useWrecksLayer";
+import { useTectonicsLayer } from "./map/useTectonicsLayer";
 import { useRainLayer } from "./map/useRainLayer";
 import { RainTimeline } from "./map/RainTimeline";
 import { useDrawShapes } from "./map/useDrawShapes";
@@ -430,6 +431,71 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
       "circle-color": "#2dd4bf",
       "circle-opacity": 0.75,
       "circle-stroke-color": "#042f2e",
+      "circle-stroke-width": 0.4,
+    },
+  });
+
+  // --- Tectonics ("Ring of Fire") workspace: plates + volcanoes + quakes ---
+  // Plate boundaries (fraxen/PB2002) — amber lines, drawn under everything else.
+  map.addSource("plates", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "plates",
+    type: "line",
+    source: "plates",
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: {
+      "line-color": "#f59e0b",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 1, 0.8, 5, 1.8, 9, 3],
+      "line-opacity": 0.55,
+      "line-dasharray": [2, 1.5],
+    },
+  });
+  // Holocene volcanoes (Smithsonian GVP) — orange triangles.
+  map.addSource("volcanoes", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "volcanoes",
+    type: "symbol",
+    source: "volcanoes",
+    layout: {
+      "text-field": "▲",
+      "text-size": ["interpolate", ["linear"], ["zoom"], 1, 9, 6, 16],
+      "text-allow-overlap": true,
+      "text-ignore-placement": true,
+    },
+    paint: {
+      "text-color": "#fb923c",
+      "text-halo-color": dark ? "rgba(0,0,0,0.6)" : "#fff",
+      "text-halo-width": 1.2,
+    },
+  });
+  // Earthquakes, past 30 days (live USGS) — circles sized + tinted by magnitude.
+  map.addSource("quakes", { type: "geojson", data: EMPTY });
+  map.addLayer({
+    id: "quakes",
+    type: "circle",
+    source: "quakes",
+    paint: {
+      "circle-radius": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "mag"], 0],
+        0, 1.5,
+        3, 4,
+        5, 9,
+        7, 18,
+      ],
+      "circle-color": [
+        "interpolate",
+        ["linear"],
+        ["coalesce", ["get", "mag"], 0],
+        1, "#fde047",
+        3, "#fb923c",
+        5, "#ef4444",
+        7, "#b91c1c",
+      ],
+      "circle-blur": 0.4,
+      "circle-opacity": 0.6,
+      "circle-stroke-color": "#450a0a",
       "circle-stroke-width": 0.4,
     },
   });
@@ -976,6 +1042,78 @@ export function MapView() {
       planePopup.remove();
     });
 
+    // Hover tooltip for earthquakes (magnitude, place, date).
+    map.on("mousemove", "quakes", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { mag?: number; place?: string; time?: number };
+      const rows = [
+        p.place ? `<div class="pp-row">${p.place}</div>` : "",
+        p.time ? `<div class="pp-row">${new Date(p.time).toLocaleString()}</div>` : "",
+      ].join("");
+      const mag = typeof p.mag === "number" ? p.mag.toFixed(1) : "—";
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🌐 M ${mag}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "quakes", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
+    // Hover tooltip for volcanoes (type, last eruption, country, elevation).
+    const fmtErupt = (y: number) =>
+      y < 0 ? `${-y} BCE` : y === 0 ? "—" : `${y} CE`;
+    map.on("mousemove", "volcanoes", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as {
+        name?: string;
+        type?: string;
+        last?: number;
+        country?: string;
+        elev?: number;
+      };
+      const rows = [
+        [p.type, p.country].filter(Boolean).length
+          ? `<div class="pp-row">${[p.type, p.country].filter(Boolean).join(" · ")}</div>`
+          : "",
+        typeof p.last === "number"
+          ? `<div class="pp-row">Last eruption&nbsp;${fmtErupt(p.last)}</div>`
+          : "",
+        typeof p.elev === "number"
+          ? `<div class="pp-row">Elevation&nbsp;${p.elev.toLocaleString("en-US")} m</div>`
+          : "",
+      ].join("");
+      planePopup
+        .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+        .setHTML(`<div class="pp-call">🌋 ${p.name || "Volcano"}</div>${rows}`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "volcanoes", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
+    // Hover tooltip for plate boundaries (boundary name).
+    map.on("mousemove", "plates", (e) => {
+      const f = e.features?.[0];
+      if (!f) return;
+      map.getCanvas().style.cursor = "pointer";
+      const p = f.properties as { name?: string };
+      planePopup
+        .setLngLat(e.lngLat)
+        .setHTML(`<div class="pp-call">🗺 ${p.name || "Plate boundary"}</div>`)
+        .addTo(map);
+    });
+    map.on("mouseleave", "plates", () => {
+      map.getCanvas().style.cursor = "";
+      planePopup.remove();
+    });
+
     // Close the feature popup when the user pans/zooms the map.
     const dismiss = () => {
       setSelectedRef.current(null);
@@ -1074,6 +1212,7 @@ export function MapView() {
   useNuclearLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useCrashesLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
   useWrecksLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
+  useTectonicsLayer(mapRef, activeWorkspaceId, styleVersion, loadedRef);
 
   // Live ISS position + orbit ring (wheretheiss.at).
   useIssLayer(mapRef, activeWorkspaceId);

@@ -13,6 +13,7 @@ import {
   NUCLEAR_ID,
   CRASH_ID,
   WRECK_ID,
+  TECTONIC_ID,
 } from "./types";
 
 // Initial data on first run (while localStorage is empty). A showcase of the
@@ -201,6 +202,20 @@ export function seedData(): AppData {
         zoom: 1.6,
         layers: [
           { id: "lyr-wrecks", name: "Wreck sites", color: "#2dd4bf", visible: true, features: [] },
+        ],
+      },
+      {
+        id: TECTONIC_ID,
+        name: "Tectonics",
+        icon: "🌋",
+        color: "#f97316",
+        style: "dark-v11",
+        pinned: true,
+        marker: "circle",
+        center: [150, 0],
+        zoom: 1.6,
+        layers: [
+          { id: "lyr-tectonics", name: "Plates · Quakes · Volcanoes", color: "#f97316", visible: true, features: [] },
         ],
       },
     ],

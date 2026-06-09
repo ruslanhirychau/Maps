@@ -68,6 +68,10 @@ export const CRASH_ID = "ws-crashes";
 // Shipwrecks worldwide (Wikidata, ~30k geolocated wreck sites) — static scatter.
 export const WRECK_ID = "ws-wrecks";
 
+// Tectonics workspace — tectonic plate boundaries (static) + live earthquakes
+// (USGS) + Holocene volcanoes (Smithsonian), the "Ring of Fire" on one map.
+export const TECTONIC_ID = "ws-tectonics";
+
 export interface Workspace {
   id: string;
   name: string;
