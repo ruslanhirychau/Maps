@@ -484,7 +484,10 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
         5, 9,
         7, 18,
       ],
-      "circle-color": [
+      // Hollow rings: no fill, magnitude colour carried by the outline.
+      "circle-color": "#000000",
+      "circle-opacity": 0,
+      "circle-stroke-color": [
         "interpolate",
         ["linear"],
         ["coalesce", ["get", "mag"], 0],
@@ -493,10 +496,8 @@ function addBaseLayers(map: mapboxgl.Map, dark: boolean) {
         5, "#ef4444",
         7, "#b91c1c",
       ],
-      "circle-blur": 0.4,
-      "circle-opacity": 0.6,
-      "circle-stroke-color": "#450a0a",
-      "circle-stroke-width": 0.4,
+      "circle-stroke-width": 1.3,
+      "circle-stroke-opacity": 0.85,
     },
   });
 
