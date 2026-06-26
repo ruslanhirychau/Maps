@@ -243,6 +243,9 @@ function firesPlugin(env: Record<string, string>): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
+    // GitHub Pages serves a project site under /<repo>/, so production assets
+    // must be referenced from that subpath. Dev stays at the root.
+    base: mode === "production" ? "/Maps/" : "/",
     plugins: [react(), aircraftPlugin(env), firesPlugin(env)],
   };
 });

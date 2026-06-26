@@ -1,7 +1,7 @@
 import { useEffect, useRef, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { METEORITE_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Static NASA meteorite-landings scatter (~32k points), served from /public so
 // it loads same-origin and only when the workspace is opened. Cached after the
@@ -29,7 +29,7 @@ export function useMeteoritesLayer(
       return;
     }
     let cancelled = false;
-    fetch("/meteorites.geojson")
+    fetch(asset("/meteorites.geojson"))
       .then((r) => r.json())
       .then((fc: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

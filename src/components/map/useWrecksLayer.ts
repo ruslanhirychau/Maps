@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { WRECK_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Shipwrecks worldwide (Wikidata — notable wrecks that have a Wikipedia
 // article, which filters out the bulk heritage-database dumps). Bundled as a
@@ -24,7 +24,7 @@ export function useWrecksLayer(
       return;
     }
     let cancelled = false;
-    fetch("/shipwrecks.geojson")
+    fetch(asset("/shipwrecks.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

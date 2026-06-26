@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { NUKETEST_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Nuclear weapon tests, 1945–1998 (SIPRI report dataset). Bundled as a static
 // asset — points carrying name / country / year / yield (kt) / type. Loaded
@@ -23,7 +23,7 @@ export function useNukeTestsLayer(
       return;
     }
     let cancelled = false;
-    fetch("/nuketests.geojson")
+    fetch(asset("/nuketests.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

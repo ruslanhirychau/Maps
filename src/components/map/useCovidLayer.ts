@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { COVID_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // COVID-19 totals by country (disease.sh, aggregating JHU/Worldometers).
 // Bundled as a static asset — a FeatureCollection of country points carrying
@@ -24,7 +24,7 @@ export function useCovidLayer(
       return;
     }
     let cancelled = false;
-    fetch("/covid.geojson")
+    fetch(asset("/covid.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

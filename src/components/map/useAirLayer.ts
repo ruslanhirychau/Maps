@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { AIR_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 interface City {
   name: string;
@@ -69,7 +69,7 @@ export function useAirLayer(
         .catch(() => {});
     };
 
-    fetch("/aq_cities.json")
+    fetch(asset("/aq_cities.json"))
       .then((r) => r.json())
       .then((list: City[]) => {
         if (cancelled) return;

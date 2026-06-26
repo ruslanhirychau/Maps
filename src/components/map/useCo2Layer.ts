@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { CO2_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // CO2 emissions by country (Our World in Data, latest year baked into Natural
 // Earth country polygons). Bundled as a static asset — a choropleth driven by
@@ -24,7 +24,7 @@ export function useCo2Layer(
       return;
     }
     let cancelled = false;
-    fetch("/co2.geojson")
+    fetch(asset("/co2.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { CABLE_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Submarine communications cables (TeleGeography's Submarine Cable Map).
 // Served as a bundled static asset (the upstream API has no CORS headers) — a
@@ -24,7 +24,7 @@ export function useCablesLayer(
       return;
     }
     let cancelled = false;
-    fetch("/cables.geojson")
+    fetch(asset("/cables.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

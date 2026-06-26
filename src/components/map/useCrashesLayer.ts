@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { CRASH_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Aviation accidents worldwide (Wikidata, geolocated). Bundled as a static
 // asset — a FeatureCollection of crash sites carrying name / operator /
@@ -23,7 +23,7 @@ export function useCrashesLayer(
       return;
     }
     let cancelled = false;
-    fetch("/crashes.geojson")
+    fetch(asset("/crashes.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

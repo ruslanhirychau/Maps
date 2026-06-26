@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { UNESCO_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // UNESCO World Heritage Sites (Wikidata, sites with inscription criteria so each
 // is categorised). Bundled as a static asset — points carrying name / country /
@@ -24,7 +24,7 @@ export function useUnescoLayer(
       return;
     }
     let cancelled = false;
-    fetch("/unesco.geojson")
+    fetch(asset("/unesco.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

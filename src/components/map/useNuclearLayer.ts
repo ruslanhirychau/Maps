@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { NUCLEAR_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // Nuclear power plants worldwide (Wikidata). Bundled as a static asset — a
 // FeatureCollection of plant points carrying name / country / capacity (MW) and
@@ -24,7 +24,7 @@ export function useNuclearLayer(
       return;
     }
     let cancelled = false;
-    fetch("/nuclear.geojson")
+    fetch(asset("/nuclear.geojson"))
       .then((r) => r.json())
       .then((j: GeoJSON.FeatureCollection) => {
         if (cancelled) return;

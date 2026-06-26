@@ -1,7 +1,7 @@
 import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { TECTONIC_ID } from "../../types";
-import { EMPTY } from "./shared";
+import { EMPTY, asset } from "./shared";
 
 // "Ring of Fire" workspace: three sources rendered together —
 //  • plates    — tectonic plate boundaries (static, fraxen/PB2002)
@@ -37,8 +37,8 @@ export function useTectonicsLayer(
         .catch(() => {});
 
     // Static layers — load once.
-    load("/plates.geojson", "plates");
-    load("/volcanoes.geojson", "volcanoes");
+    load(asset("/plates.geojson"), "plates");
+    load(asset("/volcanoes.geojson"), "volcanoes");
 
     // Live earthquakes (past 30 days) — refresh every 5 minutes.
     const loadQuakes = () =>
