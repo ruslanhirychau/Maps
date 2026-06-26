@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Ellipsis, Plus, PanelLeft, Search, FolderPlus } from "lucide-react";
+import { Ellipsis, Plus, PanelLeft, Search, FolderPlus, Key } from "lucide-react";
 import { useStore } from "../store";
 import { WorkspaceEditor } from "./WorkspaceEditor";
 import { INBOX_ID, type Workspace } from "../types";
+import { useIsMobile } from "../useIsMobile";
 
 export function Sidebar() {
   const workspaces = useStore((s) => s.workspaces);
@@ -13,7 +14,9 @@ export function Sidebar() {
   const moveWorkspace = useStore((s) => s.moveWorkspace);
   const setLayout = useStore((s) => s.setLayout);
   const setEditing = useStore((s) => s.setEditing);
+  const setKeysOpen = useStore((s) => s.setKeysOpen);
   const layout = useStore((s) => s.layout);
+  const isMobile = useIsMobile();
 
   const [editor, setEditor] = useState<"create" | string | null>(null);
   const [closing, setClosing] = useState(false);
@@ -65,10 +68,18 @@ export function Sidebar() {
           (overId === ws.id ? " dragover" : "")
         }
         style={{ ["--ws-color" as string]: ws.color }}
-        draggable
-        onClick={() =>
-          railMode ? openEditor(ws.id) : active ? fitAll() : setActiveWorkspace(ws.id)
-        }
+        draggable={!isMobile}
+        onClick={() => {
+          if (railMode) {
+            openEditor(ws.id);
+            return;
+          }
+          if (active) fitAll();
+          else setActiveWorkspace(ws.id);
+          // On mobile the sidebar is a full-screen overlay — picking a
+          // workspace should drop straight back to the map (topbar view).
+          if (isMobile) setLayout("topbar");
+        }}
         onDragStart={(e) => {
           setDragId(ws.id);
           e.dataTransfer.effectAllowed = "move";
@@ -174,6 +185,11 @@ export function Sidebar() {
           >
             <FolderPlus size={15} /> New folder
           </button>
+          {isMobile && (
+            <button className="ws-foot-btn" onClick={() => setKeysOpen(true)}>
+              <Key size={15} /> API keys
+            </button>
+          )}
         </div>
       </aside>
 
