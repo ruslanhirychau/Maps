@@ -110,7 +110,7 @@ body {
 
 .app {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 
@@ -1795,4 +1795,117 @@ body {
 .keys-foot .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* =========================================================================
+   Mobile (phone widths) — topbar is the default view; the sidebar and the
+   workspace editor become full-screen overlays reached via the brand-bar's
+   toggle button instead of a permanently docked panel.
+   ========================================================================= */
+@media (max-width: 760px) {
+  .sidebar,
+  .sidebar.rail {
+    position: fixed;
+    inset: 0;
+    width: auto;
+    z-index: 550; /* above the map controls (500) but below the brand-bar (600),
+                     so its toggle stays usable to close the overlay */
+    border-radius: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  .editor-panel,
+  .editor-panel.railed {
+    position: fixed;
+    inset: 0;
+    width: auto;
+    border-radius: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  .brand-bar {
+    top: calc(14px + env(safe-area-inset-top));
+    left: calc(16px + env(safe-area-inset-left));
+  }
+
+  .map-style {
+    top: calc(14px + env(safe-area-inset-top));
+    right: calc(16px + env(safe-area-inset-right));
+  }
+
+  .map-style-label {
+    display: none;
+  }
+
+  /* Anchor the tab capsule between the brand pill and the (icon-only) style
+     switcher instead of centering with a vw-based max-width, which collapses
+     to zero on phone screens. */
+  .topbar {
+    top: calc(14px + env(safe-area-inset-top));
+    left: calc(180px + env(safe-area-inset-left));
+    right: calc(80px + env(safe-area-inset-right));
+    transform: none;
+    max-width: none;
+  }
+
+  .topbar.hidden {
+    transform: translateX(-24px);
+  }
+
+  .topbar-tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .draw-tools {
+    right: calc(16px + env(safe-area-inset-right));
+  }
+
+  .dt-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .undo-redo {
+    left: calc(16px + env(safe-area-inset-left));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .ur-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .map-compass {
+    right: calc(16px + env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .rain-timeline {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .rain-timeline::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rt-range {
+    width: 120px;
+  }
+
+  .text-toolbar {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .text-toolbar::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -26,7 +26,8 @@ export function MapStyleSwitcher() {
         title="Map style"
         onClick={() => setOpen((o) => !o)}
       >
-        <MapIcon size={16} /> {current?.label ?? "Style"}
+        <MapIcon size={16} />
+        <span className="map-style-label">{current?.label ?? "Style"}</span>
       </button>
       {open && (
         <div className="map-style-menu">
