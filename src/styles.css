@@ -376,8 +376,13 @@ body {
 }
 
 .brand-bar .icon-btn {
-  margin-left: auto;
   color: var(--text);
+}
+
+/* Push the icon-button group to the right edge, but keep the buttons snug
+   against each other (only the first takes the auto margin). */
+.brand-bar .icon-btn:first-of-type {
+  margin-left: auto;
 }
 
 .icon-btn {
@@ -1696,4 +1701,98 @@ body {
   background: var(--elevated);
   padding: 1px 5px;
   border-radius: var(--r-sm);
+}
+
+/* =========================================================================
+   API keys popup
+   ========================================================================= */
+.keys-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 900; /* above the editor panel (700) and everything else */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: editorIn var(--t-fast);
+}
+
+.keys-modal {
+  width: 420px;
+  max-width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+
+.keys-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.keys-icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+}
+
+.keys-title {
+  flex: 1;
+  font-weight: var(--fw-medium);
+}
+
+.keys-body {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.keys-intro {
+  margin: 0 0 16px;
+}
+
+.field > span.keys-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.keys-desc a {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.field > span.keys-error {
+  display: block;
+  margin-top: 6px;
+  font-size: var(--fs-sm);
+  color: var(--danger);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.keys-foot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.keys-foot .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -5,10 +5,15 @@ import { MapView } from "./components/MapView";
 import { Sidebar } from "./components/Sidebar";
 import { TopBar } from "./components/TopBar";
 import { BrandBar } from "./components/BrandBar";
+import { ApiKeysModal } from "./components/ApiKeysModal";
+import { hasRequiredApiKeys } from "./apiKeys";
 
 export function App() {
   const workspaces = useStore((s) => s.workspaces);
   const activeWorkspaceId = useStore((s) => s.activeWorkspaceId);
+  const keysOpen = useStore((s) => s.keysOpen);
+  const setKeysOpen = useStore((s) => s.setKeysOpen);
+  const keysMissing = !hasRequiredApiKeys();
 
   // The UI theme follows the active map's basemap: dark map → dark UI.
   const styleId =
@@ -26,6 +31,9 @@ export function App() {
       <MapView />
       <TopBar />
       <BrandBar />
+      {(keysOpen || keysMissing) && (
+        <ApiKeysModal required={keysMissing} onClose={() => setKeysOpen(false)} />
+      )}
     </div>
   );
 }

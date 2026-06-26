@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useStore, PALETTE } from "../store";
 import { MAP_STYLES, type MapStyleId } from "../mapStyles";
 import { MARKER_SHAPES } from "../markers";
-import { INBOX_ID, type Workspace } from "../types";
+import { AIRCRAFT_ID, INBOX_ID, SHIPS_ID, type Workspace } from "../types";
 
 interface Props {
   workspace: Workspace | null; // null = create
@@ -37,6 +37,8 @@ export function WorkspaceEditor({
   const [color, setColor] = useState(workspace?.color ?? PALETTE[0]);
   const [style, setStyle] = useState<MapStyleId>(workspace?.style ?? "dark-v11");
   const [marker, setMarker] = useState(workspace?.marker ?? "circle");
+  const canCluster = !!workspace && workspace.id !== AIRCRAFT_ID && workspace.id !== SHIPS_ID;
+  const clusterMarkers = workspace?.layers.some((layer) => layer.cluster !== false) ?? true;
 
   // Apply a change live to the edited workspace.
   const apply = (patch: Partial<Workspace>) => {
@@ -62,6 +64,12 @@ export function WorkspaceEditor({
   const onStyle = (v: MapStyleId) => {
     setStyle(v);
     apply({ style: v });
+  };
+  const onCluster = (enabled: boolean) => {
+    if (!workspace) return;
+    apply({
+      layers: workspace.layers.map((layer) => ({ ...layer, cluster: enabled })),
+    });
   };
   const toggleMember = (id: string) => {
     const next = members.includes(id) ? members.filter((x) => x !== id) : [...members, id];
@@ -168,6 +176,17 @@ export function WorkspaceEditor({
                   />
                 </div>
               </div>
+            )}
+
+            {canCluster && !isFolder && (
+              <label className="field member">
+                <input
+                  type="checkbox"
+                  checked={clusterMarkers}
+                  onChange={(e) => onCluster(e.target.checked)}
+                />
+                <span>Cluster markers</span>
+              </label>
             )}
         </>
 

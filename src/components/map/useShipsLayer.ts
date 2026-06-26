@@ -2,6 +2,7 @@ import { useEffect, type RefObject } from "react";
 import type { Map as MbMap, GeoJSONSource } from "mapbox-gl";
 import { SHIPS_ID } from "../../types";
 import { EMPTY } from "./shared";
+import { getApiKey } from "../../apiKeys";
 
 // Live ships (AISStream WebSocket), only while "Live Ships" is active. The socket
 // is (re)connected with the current viewport bbox; ships are pruned when stale.
@@ -15,7 +16,7 @@ export function useShipsLayer(
     const setShips = (fc: GeoJSON.FeatureCollection) =>
       (map.getSource("ships") as GeoJSONSource | undefined)?.setData(fc);
 
-    const KEY = import.meta.env.VITE_AISSTREAM_KEY as string | undefined;
+    const KEY = getApiKey("VITE_AISSTREAM_KEY");
     if (activeWorkspaceId !== SHIPS_ID || !KEY) {
       setShips(EMPTY);
       return;

@@ -24,6 +24,8 @@ export interface Layer {
   name: string;
   color: string;
   visible: boolean;
+  // Marker clustering is opt-out: old/imported marker layers cluster by default.
+  cluster?: boolean;
   features: Feature[];
 }
 

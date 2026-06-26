@@ -51,7 +51,7 @@ export function seedData(): AppData {
         center: [10, 50],
         zoom: 5,
         layers: [
-          { id: "lyr-aircraft", name: "Flights", color: "#4dabf7", visible: true, features: [] },
+          { id: "lyr-aircraft", name: "Flights", color: "#4dabf7", visible: true, cluster: false, features: [] },
         ],
       },
       {
@@ -65,7 +65,7 @@ export function seedData(): AppData {
         center: [4, 52],
         zoom: 7,
         layers: [
-          { id: "lyr-ships", name: "Vessels", color: "#15aabf", visible: true, features: [] },
+          { id: "lyr-ships", name: "Vessels", color: "#15aabf", visible: true, cluster: false, features: [] },
         ],
       },
       {

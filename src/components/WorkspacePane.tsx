@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useStore } from "../store";
-import type { Workspace } from "../types";
+import { AIRCRAFT_ID, SHIPS_ID, type Workspace } from "../types";
 
 interface Props {
   workspace: Workspace;
@@ -13,9 +13,11 @@ export const WorkspacePane = memo(function WorkspacePane({
   onEdit,
 }: Props) {
   const toggleLayer = useStore((s) => s.toggleLayer);
+  const toggleLayerCluster = useStore((s) => s.toggleLayerCluster);
   const flyToFeature = useStore((s) => s.flyToFeature);
 
   const isEmpty = workspace.layers.flatMap((l) => l.features).length === 0;
+  const canCluster = workspace.id !== AIRCRAFT_ID && workspace.id !== SHIPS_ID;
 
   return (
     <div className="ws-pane" style={{ ["--accent" as string]: workspace.color }}>
@@ -29,15 +31,27 @@ export const WorkspacePane = memo(function WorkspacePane({
         <section>
           <h2>Layers</h2>
           {workspace.layers.map((lyr) => (
-            <label key={lyr.id} className="layer">
-              <input
-                type="checkbox"
-                checked={lyr.visible}
-                onChange={() => toggleLayer(lyr.id)}
-              />
-              <span className="swatch" style={{ background: lyr.color }} />
-              {lyr.name} ({lyr.features.length})
-            </label>
+            <div key={lyr.id} className="layer">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={lyr.visible}
+                  onChange={() => toggleLayer(lyr.id)}
+                />
+                <span className="swatch" style={{ background: lyr.color }} />
+                {lyr.name} ({lyr.features.length})
+              </label>
+              {canCluster && (
+                <label title="Group nearby markers">
+                  <input
+                    type="checkbox"
+                    checked={lyr.cluster !== false}
+                    onChange={() => toggleLayerCluster(lyr.id)}
+                  />
+                  Cluster
+                </label>
+              )}
+            </div>
           ))}
         </section>
 

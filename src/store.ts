@@ -3,6 +3,7 @@ import type { AppData, Feature, FeatureKind, Workspace } from "./types";
 import { INBOX_ID } from "./types";
 import type { MapStyleId } from "./mapStyles";
 import { loadData, loadView, saveData, saveView } from "./storage";
+import { hasRequiredApiKeys } from "./apiKeys";
 
 // First coordinate of a geometry — used as a shape's representative point.
 function firstPoint(geom: GeoJSON.Geometry): [number, number] | null {
@@ -62,6 +63,10 @@ interface AppState extends AppData {
   // Create-or-update a drawn shape (line/polygon) from Mapbox Draw by its id.
   upsertShape: (id: string, kind: FeatureKind, geometry: GeoJSON.Geometry) => void;
   toggleLayer: (layerId: string) => void;
+  toggleLayerCluster: (layerId: string) => void;
+  // API-keys popup: opened on first run (required key missing) or manually.
+  keysOpen: boolean;
+  setKeysOpen: (open: boolean) => void;
 }
 
 const initial = loadData();
@@ -107,6 +112,8 @@ export const useStore = create<AppState>((set, get) => {
   },
   editing: false,
   setEditing: (editing) => set({ editing }),
+  keysOpen: !hasRequiredApiKeys(),
+  setKeysOpen: (open) => set({ keysOpen: open }),
   focus: null,
 
   flyToFeature: (lngLat) =>
@@ -136,6 +143,7 @@ export const useStore = create<AppState>((set, get) => {
           name: "Layer 1",
           color: config.color,
           visible: true,
+          cluster: true,
           features: [],
         },
       ],
@@ -309,6 +317,17 @@ export const useStore = create<AppState>((set, get) => {
       ...ws,
       layers: ws.layers.map((lyr) =>
         lyr.id === layerId ? { ...lyr, visible: !lyr.visible } : lyr,
+      ),
+    }));
+    set({ workspaces: next });
+    persist(get());
+  },
+
+  toggleLayerCluster: (layerId) => {
+    const next = get().workspaces.map((ws) => ({
+      ...ws,
+      layers: ws.layers.map((lyr) =>
+        lyr.id === layerId ? { ...lyr, cluster: lyr.cluster === false } : lyr,
       ),
     }));
     set({ workspaces: next });

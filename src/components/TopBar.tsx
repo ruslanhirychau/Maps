@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { useStore } from "../store";
 import { INBOX_ID } from "../types";
+import { getApiKey } from "../apiKeys";
 
 interface SearchResult {
   id: string;
@@ -108,7 +109,7 @@ export function TopBar() {
 
     const t = window.setTimeout(async () => {
       try {
-        const token = import.meta.env.VITE_MAPBOX_TOKEN;
+        const token = getApiKey("VITE_MAPBOX_TOKEN");
         const res = await fetch(
           `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
             text,
@@ -154,7 +155,7 @@ export function TopBar() {
     }
 
     try {
-      const token = import.meta.env.VITE_MAPBOX_TOKEN;
+      const token = getApiKey("VITE_MAPBOX_TOKEN");
       const res = await fetch(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
           text,
