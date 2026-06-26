@@ -3,6 +3,7 @@ import { Search, X } from "lucide-react";
 import { useStore } from "../store";
 import { INBOX_ID } from "../types";
 import { getApiKey } from "../apiKeys";
+import { useIsMobile } from "../useIsMobile";
 
 interface SearchResult {
   id: string;
@@ -21,6 +22,7 @@ export function TopBar() {
   const flyToFeature = useStore((s) => s.flyToFeature);
   const moveWorkspace = useStore((s) => s.moveWorkspace);
   const layout = useStore((s) => s.layout);
+  const isMobile = useIsMobile();
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -179,17 +181,28 @@ export function TopBar() {
 
   const cls = "topbar" + (hidden ? " hidden" : "") + (searchOpen ? " searching" : "");
 
-  return (
-    <div className={cls}>
-      <button
-        className="topbar-back search-trigger"
-        title="Search"
-        onClick={() => setSearchOpen(true)}
-      >
-        <Search size={16} />
-      </button>
+  const searchTrigger = (
+    <button
+      className="topbar-back search-trigger"
+      title="Search"
+      onClick={() => setSearchOpen(true)}
+    >
+      <Search size={16} />
+    </button>
+  );
 
-      <div className="topbar-tabs">
+  return (
+    <>
+      {/* On mobile the tab bar moves to a full-width strip at the bottom, so
+          the trigger is rendered next to the map-style switcher instead —
+          it can't stay nested in the capsule (its glass blur makes it the
+          containing block for fixed/absolute descendants). */}
+      {isMobile && !searchOpen && !hidden && searchTrigger}
+
+      <div className={cls}>
+        {!isMobile && searchTrigger}
+
+        <div className="topbar-tabs">
         {tabs.map((ws) => (
           <button
             key={ws.id}
@@ -278,6 +291,7 @@ export function TopBar() {
           ))}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }

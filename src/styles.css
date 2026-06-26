@@ -1839,24 +1839,42 @@ body {
     display: none;
   }
 
-  /* Anchor the tab capsule between the brand pill and the (icon-only) style
-     switcher instead of centering with a vw-based max-width, which collapses
-     to zero on phone screens. */
+  /* Collapsed view: the tab capsule becomes a full-width bar pinned to the
+     bottom of the screen (instead of a centered top capsule, which had no
+     room to breathe between the brand pill and style switcher on phones).
+     The search trigger renders next to the map-style switcher instead (see
+     TopBar.tsx, which moves it out of the capsule on mobile), so the bottom
+     bar stays tabs-only. */
   .topbar {
-    top: calc(14px + env(safe-area-inset-top));
-    left: calc(180px + env(safe-area-inset-left));
-    right: calc(80px + env(safe-area-inset-right));
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: calc(12px + env(safe-area-inset-left));
+    right: calc(12px + env(safe-area-inset-right));
     transform: none;
     max-width: none;
   }
 
   .topbar.hidden {
-    transform: translateX(-24px);
+    transform: translateY(32px);
   }
 
   .topbar-tabs {
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  .topbar-back.search-trigger {
+    position: fixed;
+    top: calc(18px + env(safe-area-inset-top));
+    right: calc(76px + env(safe-area-inset-right));
+    left: auto;
+    z-index: 500;
+  }
+
+  /* Results now open upward, since the bar lives at the bottom. */
+  .topbar-results {
+    top: auto;
+    bottom: calc(100% + 6px);
   }
 
   .draw-tools {
@@ -1868,9 +1886,10 @@ body {
     height: 44px;
   }
 
+  /* Bottom-anchored controls clear the full-width tab bar below them. */
   .undo-redo {
     left: calc(16px + env(safe-area-inset-left));
-    bottom: calc(16px + env(safe-area-inset-bottom));
+    bottom: calc(78px + env(safe-area-inset-bottom));
   }
 
   .ur-btn {
@@ -1880,11 +1899,11 @@ body {
 
   .map-compass {
     right: calc(16px + env(safe-area-inset-right));
-    bottom: calc(16px + env(safe-area-inset-bottom));
+    bottom: calc(78px + env(safe-area-inset-bottom));
   }
 
   .rain-timeline {
-    bottom: calc(24px + env(safe-area-inset-bottom));
+    bottom: calc(86px + env(safe-area-inset-bottom));
     max-width: calc(100vw - 24px);
     overflow-x: auto;
     scrollbar-width: none;
@@ -1899,7 +1918,7 @@ body {
   }
 
   .text-toolbar {
-    bottom: calc(24px + env(safe-area-inset-bottom));
+    bottom: calc(86px + env(safe-area-inset-bottom));
     max-width: calc(100vw - 24px);
     overflow-x: auto;
     scrollbar-width: none;
