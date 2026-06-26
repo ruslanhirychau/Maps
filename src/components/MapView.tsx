@@ -38,6 +38,7 @@ import { styleUrl, isDarkStyle, DEFAULT_STYLE } from "../mapStyles";
 import { markerGlyph } from "../markers";
 import { loadView, saveView } from "../storage";
 import { getApiKey } from "../apiKeys";
+import { useIsMobile } from "../useIsMobile";
 import {
   Type,
   Check,
@@ -72,8 +73,11 @@ const TEXT_COLORS = ["#ffffff", "#ffd43b", "#ff6b6b", "#4dabf7", "#69db7c", "#21
 
 // Left padding (px) applied to the map when the sidebar overlays it, so the
 // optical center / vanishing point sits in the visible area, not under the bar.
+// On mobile the sidebar is a full-screen overlay instead of a docked panel, so
+// it never reserves map space.
 const SIDEBAR_PAD = 296; // sidebar width (280) + 8px gap on each side
-const leftPad = (layout: string) => (layout === "sidebar" ? SIDEBAR_PAD : 0);
+const leftPad = (layout: string, isMobile: boolean) =>
+  !isMobile && layout === "sidebar" ? SIDEBAR_PAD : 0;
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (ch) => {
@@ -151,6 +155,7 @@ export function MapView() {
   const focus = useStore((s) => s.focus);
   const fitNonce = useStore((s) => s.fitNonce);
   const layout = useStore((s) => s.layout);
+  const isMobile = useIsMobile();
 
   const desiredStyle = styleUrl(workspace ? workspace.style : DEFAULT_STYLE);
 
@@ -237,7 +242,7 @@ export function MapView() {
     // Offset the optical center for the overlaid sidebar, then re-anchor the
     // saved center so it stays put (no drift across reloads).
     map.once("load", () => {
-      map.setPadding({ top: 0, right: 0, bottom: 0, left: leftPad(layout) });
+      map.setPadding({ top: 0, right: 0, bottom: 0, left: leftPad(layout, isMobile) });
       map.setCenter(view.center);
     });
 
@@ -397,7 +402,7 @@ export function MapView() {
       (b, p) => b.extend(p),
       new mapboxgl.LngLatBounds(points[0], points[0]),
     );
-    const pad = leftPad(useStore.getState().layout);
+    const pad = leftPad(useStore.getState().layout, isMobile);
     // Inset by the sidebar on the left so points aren't framed under it.
     // Cap zoom so a single point (or tight cluster) doesn't zoom to the max.
     map.fitBounds(bounds, {
@@ -437,10 +442,10 @@ export function MapView() {
     const map = mapRef.current;
     if (!map) return;
     map.easeTo({
-      padding: { top: 0, right: 0, bottom: 0, left: leftPad(layout) },
+      padding: { top: 0, right: 0, bottom: 0, left: leftPad(layout, isMobile) },
       duration: 300,
     });
-  }, [layout]);
+  }, [layout, isMobile]);
 
   // Live aircraft + ships + lightning (extracted hooks).
   useAircraftLayer(mapRef, activeWorkspaceId);
@@ -542,7 +547,7 @@ export function MapView() {
   return (
     <div
       className="map-wrap"
-      style={{ ["--left-inset" as string]: `${leftPad(layout)}px` }}
+      style={{ ["--left-inset" as string]: `${leftPad(layout, isMobile)}px` }}
     >
       <div ref={containerRef} className="map-container" />
       <MapCompass map={map} />
