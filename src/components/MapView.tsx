@@ -229,7 +229,7 @@ export function MapView() {
       zoom: view.zoom,
     });
     if (import.meta.env.DEV) {
-      (window as unknown as { __glopeMap?: mapboxgl.Map }).__glopeMap = map;
+      (window as unknown as { __mapsMap?: mapboxgl.Map }).__mapsMap = map;
     }
     mapRef.current = map;
     setMap(map); // expose to the custom compass

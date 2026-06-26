@@ -17,7 +17,7 @@ export function BrandBar() {
         (editing ? " hidden" : "")
       }
     >
-      <span className="brand">Glope</span>
+      <span className="brand">Maps</span>
       <button className="icon-btn" title="API keys" onClick={() => setKeysOpen(true)}>
         <Key size={16} />
       </button>
