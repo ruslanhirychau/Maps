@@ -4,6 +4,7 @@ import { INBOX_ID } from "./types";
 import type { MapStyleId } from "./mapStyles";
 import { loadData, loadView, saveData, saveView } from "./storage";
 import { hasRequiredApiKeys } from "./apiKeys";
+import { MOBILE_QUERY } from "./useIsMobile";
 
 // First coordinate of a geometry — used as a shape's representative point.
 function firstPoint(geom: GeoJSON.Geometry): [number, number] | null {
@@ -102,10 +103,17 @@ export const useStore = create<AppState>((set, get) => {
     persist(get());
   };
 
+  // A fresh mobile visit always lands on the topbar, even if a previous
+  // desktop session last saved "sidebar" — the docked sidebar only makes
+  // sense at desktop widths.
+  const initialLayout: Layout = window.matchMedia(MOBILE_QUERY).matches
+    ? "topbar"
+    : loadView().layout;
+
   return {
   ...initial,
   tool: "none",
-  layout: loadView().layout,
+  layout: initialLayout,
   setLayout: (layout) => {
     set({ layout });
     saveView({ layout });

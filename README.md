@@ -1,4 +1,4 @@
-# Glope
+# Maps
 
 An interactive data-visualization map prototype built on Mapbox GL JS. Data is
 grouped into **workspaces** (live feeds, overlays, your own markers/notes), each
