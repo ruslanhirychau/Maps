@@ -1,0 +1,1482 @@
+[
+  {
+    "id": "fpv-0",
+    "kind": "marker",
+    "lngLat": [
+      19.23502777777778,
+      49.536027777777775
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701224
+  },
+  {
+    "id": "fpv-1",
+    "kind": "marker",
+    "lngLat": [
+      16.017085,
+      53.146601
+    ],
+    "title": "Dropped pin — Szlak pieszy niebieski",
+    "properties": {
+      "text": "Near Szlak pieszy niebieski",
+      "approx": true
+    },
+    "createdAt": 1781888701225
+  },
+  {
+    "id": "fpv-2",
+    "kind": "marker",
+    "lngLat": [
+      14.416488,
+      35.949592
+    ],
+    "title": "Hala Redykalna",
+    "properties": {
+      "text": "Tourist attraction",
+      "approx": true
+    },
+    "createdAt": 1781888701226
+  },
+  {
+    "id": "fpv-3",
+    "kind": "marker",
+    "lngLat": [
+      20.8755912,
+      52.2988077
+    ],
+    "title": "Parking",
+    "properties": {
+      "text": "Rękopis 43a",
+      "rating": 5,
+      "url": "http://maps.google.com/?q=R%C4%99kopis+43a,+01-936+Warszawa&ftid=0x471eb5fbacdd36b5:0x44eb8d43df1bcca4"
+    },
+    "createdAt": 1781888701227
+  },
+  {
+    "id": "fpv-4",
+    "kind": "marker",
+    "lngLat": [
+      20.995527777777777,
+      52.27697222222222
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701228
+  },
+  {
+    "id": "fpv-5",
+    "kind": "marker",
+    "lngLat": [
+      20.956598,
+      53.86356
+    ],
+    "title": "Dropped pin — Gmina Biskupiec",
+    "properties": {
+      "text": "Near Gmina Biskupiec",
+      "approx": true
+    },
+    "createdAt": 1781888701229
+  },
+  {
+    "id": "fpv-6",
+    "kind": "marker",
+    "lngLat": [
+      21.078957,
+      52.248423
+    ],
+    "title": "Rębkowska 14",
+    "properties": {
+      "text": "04-375 Warszawa",
+      "approx": true
+    },
+    "createdAt": 1781888701230
+  },
+  {
+    "id": "fpv-7",
+    "kind": "marker",
+    "lngLat": [
+      19.930995,
+      49.293237
+    ],
+    "title": "Dropped pin — Polana Szymoszkowa 2, 34-500 Zakopane",
+    "properties": {
+      "text": "Near Polana Szymoszkowa 2, 34-500 Zakopane",
+      "approx": true
+    },
+    "createdAt": 1781888701231
+  },
+  {
+    "id": "fpv-8",
+    "kind": "marker",
+    "lngLat": [
+      -80.409927,
+      39.107966
+    ],
+    "title": "Compensa Concert Hall",
+    "properties": {
+      "text": "Concert hall",
+      "approx": true
+    },
+    "createdAt": 1781888701232
+  },
+  {
+    "id": "fpv-9",
+    "kind": "marker",
+    "lngLat": [
+      21.61228,
+      52.097539
+    ],
+    "title": "Mińska 65",
+    "properties": {
+      "text": "Permanently closed",
+      "approx": true
+    },
+    "createdAt": 1781888701233
+  },
+  {
+    "id": "fpv-10",
+    "kind": "marker",
+    "lngLat": [
+      21.0365,
+      52.243027777777776
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701234
+  },
+  {
+    "id": "fpv-11",
+    "kind": "marker",
+    "lngLat": [
+      21.047027777777778,
+      52.24358333333333
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701235
+  },
+  {
+    "id": "fpv-12",
+    "kind": "marker",
+    "lngLat": [
+      21.03333333333333,
+      52.23902777777778
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701236
+  },
+  {
+    "id": "fpv-13",
+    "kind": "marker",
+    "lngLat": [
+      19.311805555555555,
+      54.35911111111111
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701237
+  },
+  {
+    "id": "fpv-14",
+    "kind": "marker",
+    "lngLat": [
+      14.047319,
+      53.735886
+    ],
+    "title": "Silesia Ring - Kamień Śląski",
+    "properties": {
+      "text": "Racecourse",
+      "approx": true
+    },
+    "createdAt": 1781888701238
+  },
+  {
+    "id": "fpv-15",
+    "kind": "marker",
+    "lngLat": [
+      -93.393995,
+      44.249601
+    ],
+    "title": "Rope Park Warsaw",
+    "properties": {
+      "text": "Amusement park ride",
+      "approx": true
+    },
+    "createdAt": 1781888701239
+  },
+  {
+    "id": "fpv-16",
+    "kind": "marker",
+    "lngLat": [
+      20.3302,
+      52.394366
+    ],
+    "title": "Dropped pin — Praga, Warsaw",
+    "properties": {
+      "text": "Near Praga, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701240
+  },
+  {
+    "id": "fpv-17",
+    "kind": "marker",
+    "lngLat": [
+      20.3302,
+      52.394366
+    ],
+    "title": "Dropped pin — Praga, Warsaw",
+    "properties": {
+      "text": "Near Praga, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701241
+  },
+  {
+    "id": "fpv-18",
+    "kind": "marker",
+    "lngLat": [
+      19.178812,
+      54.326141
+    ],
+    "title": "Dropped pin — Gmina Sztutowo",
+    "properties": {
+      "text": "Near Gmina Sztutowo",
+      "approx": true
+    },
+    "createdAt": 1781888701242
+  },
+  {
+    "id": "fpv-19",
+    "kind": "marker",
+    "lngLat": [
+      19.11455,
+      54.213943
+    ],
+    "title": "Dropped pin — Nowy Dwór Gdański County",
+    "properties": {
+      "text": "Near Nowy Dwór Gdański County",
+      "approx": true
+    },
+    "createdAt": 1781888701243
+  },
+  {
+    "id": "fpv-20",
+    "kind": "marker",
+    "lngLat": [
+      19.11455,
+      54.213943
+    ],
+    "title": "Dropped pin — Nowy Dwór Gdański County",
+    "properties": {
+      "text": "Near Nowy Dwór Gdański County",
+      "approx": true
+    },
+    "createdAt": 1781888701244
+  },
+  {
+    "id": "fpv-21",
+    "kind": "marker",
+    "lngLat": [
+      21.016317,
+      52.23072
+    ],
+    "title": "Dropped pin — Warsaw New Town, 01-001 Warsaw",
+    "properties": {
+      "text": "Near Warsaw New Town, 01-001 Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701245
+  },
+  {
+    "id": "fpv-22",
+    "kind": "marker",
+    "lngLat": [
+      20.906496,
+      52.240033
+    ],
+    "title": "Dropped pin — Górczewska 212/226, 01-460 Warszawa",
+    "properties": {
+      "text": "Near Górczewska 212/226, 01-460 Warszawa",
+      "approx": true
+    },
+    "createdAt": 1781888701246
+  },
+  {
+    "id": "fpv-23",
+    "kind": "marker",
+    "lngLat": [
+      -85.856641,
+      41.238095
+    ],
+    "title": "Dropped pin — Odolany, Warsaw",
+    "properties": {
+      "text": "Near Odolany, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701247
+  },
+  {
+    "id": "fpv-24",
+    "kind": "marker",
+    "lngLat": [
+      20.947789,
+      52.235205
+    ],
+    "title": "Dropped pin — Elekcyjna, Warszawa",
+    "properties": {
+      "text": "Near Elekcyjna, Warszawa",
+      "approx": true
+    },
+    "createdAt": 1781888701248
+  },
+  {
+    "id": "fpv-25",
+    "kind": "marker",
+    "lngLat": [
+      17.013989,
+      51.095082
+    ],
+    "title": "Dropped pin — plac Hirszfelda 52, 52-007 Wrocław",
+    "properties": {
+      "text": "Near plac Hirszfelda 52, 52-007 Wrocław",
+      "approx": true
+    },
+    "createdAt": 1781888701249
+  },
+  {
+    "id": "fpv-26",
+    "kind": "marker",
+    "lngLat": [
+      17.032669,
+      51.108978
+    ],
+    "title": "Dropped pin — Lower Silesian Voivodeship",
+    "properties": {
+      "text": "Near Lower Silesian Voivodeship",
+      "approx": true
+    },
+    "createdAt": 1781888701250
+  },
+  {
+    "id": "fpv-27",
+    "kind": "marker",
+    "lngLat": [
+      17.04276,
+      51.111811
+    ],
+    "title": "Dropped pin — Frycza-Modrzewskiego, 52-007 Wrocław",
+    "properties": {
+      "text": "Near Frycza-Modrzewskiego, 52-007 Wrocław",
+      "approx": true
+    },
+    "createdAt": 1781888701251
+  },
+  {
+    "id": "fpv-28",
+    "kind": "marker",
+    "lngLat": [
+      35.888026,
+      33.920265
+    ],
+    "title": "Dropped pin — Łeba",
+    "properties": {
+      "text": "Near Łeba",
+      "approx": true
+    },
+    "createdAt": 1781888701252
+  },
+  {
+    "id": "fpv-29",
+    "kind": "marker",
+    "lngLat": [
+      21.08178,
+      52.186774
+    ],
+    "title": "Dropped pin — Augustówka, Warsaw",
+    "properties": {
+      "text": "Near Augustówka, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701253
+  },
+  {
+    "id": "fpv-30",
+    "kind": "marker",
+    "lngLat": [
+      20.99914,
+      52.235872
+    ],
+    "title": "Dropped pin — Bella Dent Izabela Staniek - Laboratorium Techniki Dentystycznej, Grzybowska 9, 00-132 Warszawa",
+    "properties": {
+      "text": "Near Bella Dent Izabela Staniek - Laboratorium Techniki Dentystycznej, Grzybowska 9, 00-132 Warszawa",
+      "approx": true
+    },
+    "createdAt": 1781888701254
+  },
+  {
+    "id": "fpv-31",
+    "kind": "marker",
+    "lngLat": [
+      -82.01316,
+      40.329052
+    ],
+    "title": "Dropped pin — Śródmieście Północne, Warsaw, Warsaw",
+    "properties": {
+      "text": "Near Śródmieście Północne, Warsaw, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701255
+  },
+  {
+    "id": "fpv-32",
+    "kind": "marker",
+    "lngLat": [
+      19.967055555555554,
+      49.29877777777778
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701256
+  },
+  {
+    "id": "fpv-33",
+    "kind": "marker",
+    "lngLat": [
+      -85.856641,
+      41.238095
+    ],
+    "title": "Dropped pin — Odolany, Warsaw",
+    "properties": {
+      "text": "Near Odolany, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701257
+  },
+  {
+    "id": "fpv-34",
+    "kind": "marker",
+    "lngLat": [
+      18.650743,
+      54.350178
+    ],
+    "title": "Dropped pin — Gdańsk",
+    "properties": {
+      "text": "Near Gdańsk",
+      "approx": true
+    },
+    "createdAt": 1781888701258
+  },
+  {
+    "id": "fpv-35",
+    "kind": "marker",
+    "lngLat": [
+      18.650743,
+      54.350178
+    ],
+    "title": "Dropped pin — Gdańsk",
+    "properties": {
+      "text": "Near Gdańsk",
+      "approx": true
+    },
+    "createdAt": 1781888701259
+  },
+  {
+    "id": "fpv-36",
+    "kind": "marker",
+    "lngLat": [
+      20.872055555555555,
+      52.601083333333335
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701260
+  },
+  {
+    "id": "fpv-37",
+    "kind": "marker",
+    "lngLat": [
+      21.016317,
+      52.23072
+    ],
+    "title": "Dropped pin — Ulrychów, Warsaw",
+    "properties": {
+      "text": "Near Ulrychów, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701261
+  },
+  {
+    "id": "fpv-38",
+    "kind": "marker",
+    "lngLat": [
+      19.670261,
+      52.553253
+    ],
+    "title": "Dropped pin — Gmina Mały Płock",
+    "properties": {
+      "text": "Near Gmina Mały Płock",
+      "approx": true
+    },
+    "createdAt": 1781888701262
+  },
+  {
+    "id": "fpv-39",
+    "kind": "marker",
+    "lngLat": [
+      -86.285063,
+      41.20867
+    ],
+    "title": "Dropped pin — Plaża Gminna, Stare Sady 18B, 11-730 Stare Sady",
+    "properties": {
+      "text": "Near Plaża Gminna, Stare Sady 18B, 11-730 Stare Sady",
+      "approx": true
+    },
+    "createdAt": 1781888701263
+  },
+  {
+    "id": "fpv-40",
+    "kind": "marker",
+    "lngLat": [
+      19.890387,
+      52.573307
+    ],
+    "title": "Dropped pin — DW567, 09-451",
+    "properties": {
+      "text": "Near DW567, 09-451",
+      "approx": true
+    },
+    "createdAt": 1781888701264
+  },
+  {
+    "id": "fpv-41",
+    "kind": "marker",
+    "lngLat": [
+      20.925898,
+      52.223587
+    ],
+    "title": "Dropped pin — Parking lot, Połczyńska 4, 01-001 Warszawa",
+    "properties": {
+      "text": "Near Parking lot, Połczyńska 4, 01-001 Warszawa",
+      "approx": true
+    },
+    "createdAt": 1781888701265
+  },
+  {
+    "id": "fpv-42",
+    "kind": "marker",
+    "lngLat": [
+      15.70822,
+      50.879301
+    ],
+    "title": "Dropped pin — Gmina Podgórzyn",
+    "properties": {
+      "text": "Near Gmina Podgórzyn",
+      "approx": true
+    },
+    "createdAt": 1781888701266
+  },
+  {
+    "id": "fpv-43",
+    "kind": "marker",
+    "lngLat": [
+      20.927055555555558,
+      51.87972222222222
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701267
+  },
+  {
+    "id": "fpv-44",
+    "kind": "marker",
+    "lngLat": [
+      20.616474,
+      52.194378
+    ],
+    "title": "Dropped pin — Błonia Wilanowskie, Warsaw",
+    "properties": {
+      "text": "Near Błonia Wilanowskie, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701268
+  },
+  {
+    "id": "fpv-45",
+    "kind": "marker",
+    "lngLat": [
+      20.208135,
+      52.047068
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701269
+  },
+  {
+    "id": "fpv-46",
+    "kind": "marker",
+    "lngLat": [
+      20.888193,
+      52.34053
+    ],
+    "title": "Dropped pin — Gmina Łomianki",
+    "properties": {
+      "text": "Near Gmina Łomianki",
+      "approx": true
+    },
+    "createdAt": 1781888701270
+  },
+  {
+    "id": "fpv-47",
+    "kind": "marker",
+    "lngLat": [
+      11.077956,
+      53.505171
+    ],
+    "title": "Dropped pin — 05-092 Łomianki Dolne",
+    "properties": {
+      "text": "Near 05-092 Łomianki Dolne",
+      "approx": true
+    },
+    "createdAt": 1781888701271
+  },
+  {
+    "id": "fpv-48",
+    "kind": "marker",
+    "lngLat": [
+      20.314753,
+      50.61134
+    ],
+    "title": "Dropped pin — Ludwinów, Kraków",
+    "properties": {
+      "text": "Near Ludwinów, Kraków",
+      "approx": true
+    },
+    "createdAt": 1781888701272
+  },
+  {
+    "id": "fpv-49",
+    "kind": "marker",
+    "lngLat": [
+      -88.219323,
+      44.772894
+    ],
+    "title": "Dropped pin — Kraków Old Town, Kraków",
+    "properties": {
+      "text": "Near Kraków Old Town, Kraków",
+      "approx": true
+    },
+    "createdAt": 1781888701273
+  },
+  {
+    "id": "fpv-50",
+    "kind": "marker",
+    "lngLat": [
+      19.943144,
+      50.049109
+    ],
+    "title": "Dropped pin — Cytadela Twierdzy Kraków, 33-332 Kraków",
+    "properties": {
+      "text": "Near Cytadela Twierdzy Kraków, 33-332 Kraków",
+      "approx": true
+    },
+    "createdAt": 1781888701274
+  },
+  {
+    "id": "fpv-51",
+    "kind": "marker",
+    "lngLat": [
+      19.915462,
+      50.057941
+    ],
+    "title": "Dropped pin — Lodowisko Krakowskie Błonia, Aleja Marszałka Ferdynanda Focha, 31-119 Kraków",
+    "properties": {
+      "text": "Near Lodowisko Krakowskie Błonia, Aleja Marszałka Ferdynanda Focha, 31-119 Kraków",
+      "approx": true
+    },
+    "createdAt": 1781888701275
+  },
+  {
+    "id": "fpv-52",
+    "kind": "marker",
+    "lngLat": [
+      19.916681,
+      50.065158
+    ],
+    "title": "Dropped pin — Krowodrza, 30-059 Kraków",
+    "properties": {
+      "text": "Near Krowodrza, 30-059 Kraków",
+      "approx": true
+    },
+    "createdAt": 1781888701276
+  },
+  {
+    "id": "fpv-53",
+    "kind": "marker",
+    "lngLat": [
+      20.731739,
+      52.391467
+    ],
+    "title": "Dropped pin — Gmina Czosnów",
+    "properties": {
+      "text": "Near Gmina Czosnów",
+      "approx": true
+    },
+    "createdAt": 1781888701277
+  },
+  {
+    "id": "fpv-54",
+    "kind": "marker",
+    "lngLat": [
+      19.888737,
+      49.29064
+    ],
+    "title": "Dropped pin — Gmina Kościelisko",
+    "properties": {
+      "text": "Near Gmina Kościelisko",
+      "approx": true
+    },
+    "createdAt": 1781888701278
+  },
+  {
+    "id": "fpv-55",
+    "kind": "marker",
+    "lngLat": [
+      19.888737,
+      49.29064
+    ],
+    "title": "Dropped pin — Kościelisko",
+    "properties": {
+      "text": "Near Kościelisko",
+      "approx": true
+    },
+    "createdAt": 1781888701279
+  },
+  {
+    "id": "fpv-56",
+    "kind": "marker",
+    "lngLat": [
+      19.888737,
+      49.29064
+    ],
+    "title": "Dropped pin — Gmina Kościelisko",
+    "properties": {
+      "text": "Near Gmina Kościelisko",
+      "approx": true
+    },
+    "createdAt": 1781888701280
+  },
+  {
+    "id": "fpv-57",
+    "kind": "marker",
+    "lngLat": [
+      21.08511111111111,
+      52.500083333333336
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701281
+  },
+  {
+    "id": "fpv-58",
+    "kind": "marker",
+    "lngLat": [
+      12.501993,
+      61.134167
+    ],
+    "title": "Motocross",
+    "properties": {
+      "text": "Place no longer exists",
+      "approx": true
+    },
+    "createdAt": 1781888701282
+  },
+  {
+    "id": "fpv-59",
+    "kind": "marker",
+    "lngLat": [
+      -81.496659,
+      31.208598
+    ],
+    "title": "Dropped pin — Seafront Promenade, Batumi, Georgia",
+    "properties": {
+      "text": "Near Seafront Promenade, Batumi, Georgia",
+      "approx": true
+    },
+    "createdAt": 1781888701283
+  },
+  {
+    "id": "fpv-60",
+    "kind": "marker",
+    "lngLat": [
+      41.871689,
+      42.507212
+    ],
+    "title": "Dropped pin — Samegrelo-Zemo Svaneti, Georgia",
+    "properties": {
+      "text": "Near Samegrelo-Zemo Svaneti, Georgia",
+      "approx": true
+    },
+    "createdAt": 1781888701284
+  },
+  {
+    "id": "fpv-61",
+    "kind": "marker",
+    "lngLat": [
+      2.31769,
+      48.87664
+    ],
+    "title": "Dropped pin — Europe",
+    "properties": {
+      "text": "Near Europe",
+      "approx": true
+    },
+    "createdAt": 1781888701285
+  },
+  {
+    "id": "fpv-62",
+    "kind": "marker",
+    "lngLat": [
+      21.21595,
+      51.98171
+    ],
+    "title": "Dropped pin — Gmina Góra Kalwaria",
+    "properties": {
+      "text": "Near Gmina Góra Kalwaria",
+      "approx": true
+    },
+    "createdAt": 1781888701286
+  },
+  {
+    "id": "fpv-63",
+    "kind": "marker",
+    "lngLat": [
+      20.616474,
+      52.194378
+    ],
+    "title": "Dropped pin — Błonia Wilanowskie, Warsaw",
+    "properties": {
+      "text": "Near Błonia Wilanowskie, Warsaw",
+      "approx": true
+    },
+    "createdAt": 1781888701287
+  },
+  {
+    "id": "fpv-64",
+    "kind": "marker",
+    "lngLat": [
+      23.150389,
+      53.144548
+    ],
+    "title": "Dropped pin — Gmina Radzymin",
+    "properties": {
+      "text": "Near Gmina Radzymin",
+      "approx": true
+    },
+    "createdAt": 1781888701288
+  },
+  {
+    "id": "fpv-65",
+    "kind": "marker",
+    "lngLat": [
+      42.597949,
+      42.325352
+    ],
+    "title": "Dropped pin — Tskaltubo, Georgia",
+    "properties": {
+      "text": "Near Tskaltubo, Georgia",
+      "approx": true
+    },
+    "createdAt": 1781888701289
+  },
+  {
+    "id": "fpv-66",
+    "kind": "marker",
+    "lngLat": [
+      44.719559,
+      41.846295
+    ],
+    "title": "Dropped pin — Mtskheta-Mtianeti, Georgia",
+    "properties": {
+      "text": "Near Mtskheta-Mtianeti, Georgia",
+      "approx": true
+    },
+    "createdAt": 1781888701290
+  },
+  {
+    "id": "fpv-67",
+    "kind": "marker",
+    "lngLat": [
+      43.517448,
+      42.176311
+    ],
+    "title": "Dropped pin — Georgia",
+    "properties": {
+      "text": "Near Georgia",
+      "approx": true
+    },
+    "createdAt": 1781888701291
+  },
+  {
+    "id": "fpv-68",
+    "kind": "marker",
+    "lngLat": [
+      27.115805555555557,
+      53.96280555555556
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701292
+  },
+  {
+    "id": "fpv-69",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701293
+  },
+  {
+    "id": "fpv-70",
+    "kind": "marker",
+    "lngLat": [
+      21.103743,
+      52.321312
+    ],
+    "title": "Dropped pin — Marki",
+    "properties": {
+      "text": "Near Marki",
+      "approx": true
+    },
+    "createdAt": 1781888701294
+  },
+  {
+    "id": "fpv-71",
+    "kind": "marker",
+    "lngLat": [
+      26.950765,
+      53.95458
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701295
+  },
+  {
+    "id": "fpv-72",
+    "kind": "marker",
+    "lngLat": [
+      123.728004,
+      12.569226
+    ],
+    "title": "Dropped pin — Dzyarzhynsk District",
+    "properties": {
+      "text": "Near Dzyarzhynsk District",
+      "approx": true
+    },
+    "createdAt": 1781888701296
+  },
+  {
+    "id": "fpv-73",
+    "kind": "marker",
+    "lngLat": [
+      123.728004,
+      12.569226
+    ],
+    "title": "Dropped pin — Dzyarzhynsk District",
+    "properties": {
+      "text": "Near Dzyarzhynsk District",
+      "approx": true
+    },
+    "createdAt": 1781888701297
+  },
+  {
+    "id": "fpv-74",
+    "kind": "marker",
+    "lngLat": [
+      27.27322222222222,
+      53.91936111111111
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701298
+  },
+  {
+    "id": "fpv-75",
+    "kind": "marker",
+    "lngLat": [
+      27.27497222222222,
+      53.9165
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701299
+  },
+  {
+    "id": "fpv-76",
+    "kind": "marker",
+    "lngLat": [
+      28.046788,
+      53.539998
+    ],
+    "title": "Belarus",
+    "properties": {
+      "approx": true
+    },
+    "createdAt": 1781888701300
+  },
+  {
+    "id": "fpv-77",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701301
+  },
+  {
+    "id": "fpv-78",
+    "kind": "marker",
+    "lngLat": [
+      27.33225,
+      53.96163888888889
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701302
+  },
+  {
+    "id": "fpv-79",
+    "kind": "marker",
+    "lngLat": [
+      26.969111111111108,
+      53.98113888888889
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701303
+  },
+  {
+    "id": "fpv-80",
+    "kind": "marker",
+    "lngLat": [
+      26.44611111111111,
+      54.94136111111111
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701304
+  },
+  {
+    "id": "fpv-81",
+    "kind": "marker",
+    "lngLat": [
+      26.451833333333333,
+      54.952111111111115
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701305
+  },
+  {
+    "id": "fpv-82",
+    "kind": "marker",
+    "lngLat": [
+      24.36036,
+      49.294834
+    ],
+    "title": "Dropped pin — Chasovnya, Lukovets",
+    "properties": {
+      "text": "Near Chasovnya, Lukovets",
+      "approx": true
+    },
+    "createdAt": 1781888701306
+  },
+  {
+    "id": "fpv-83",
+    "kind": "marker",
+    "lngLat": [
+      19.300636,
+      52.12461
+    ],
+    "title": "Dropped pin — Lobkovichi",
+    "properties": {
+      "text": "Near Lobkovichi",
+      "approx": true
+    },
+    "createdAt": 1781888701307
+  },
+  {
+    "id": "fpv-84",
+    "kind": "marker",
+    "lngLat": [
+      30.350166666666667,
+      53.50336111111111
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701308
+  },
+  {
+    "id": "fpv-85",
+    "kind": "marker",
+    "lngLat": [
+      -88.773951,
+      17.243831
+    ],
+    "title": "Dropped pin — Chyhirynka Water Reservoir",
+    "properties": {
+      "text": "Near Chyhirynka Water Reservoir",
+      "approx": true
+    },
+    "createdAt": 1781888701309
+  },
+  {
+    "id": "fpv-86",
+    "kind": "marker",
+    "lngLat": [
+      -77.036543,
+      38.895037
+    ],
+    "title": "Dropped pin — Bykhaw District",
+    "properties": {
+      "text": "Near Bykhaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701310
+  },
+  {
+    "id": "fpv-87",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701311
+  },
+  {
+    "id": "fpv-88",
+    "kind": "marker",
+    "lngLat": [
+      27.4665,
+      53.95408333333334
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701312
+  },
+  {
+    "id": "fpv-89",
+    "kind": "marker",
+    "lngLat": [
+      27.455027777777776,
+      53.95480555555556
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701313
+  },
+  {
+    "id": "fpv-90",
+    "kind": "marker",
+    "lngLat": [
+      27.389499999999998,
+      53.958444444444446
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701314
+  },
+  {
+    "id": "fpv-91",
+    "kind": "marker",
+    "lngLat": [
+      27.628444444444444,
+      53.80888888888889
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701315
+  },
+  {
+    "id": "fpv-92",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701316
+  },
+  {
+    "id": "fpv-93",
+    "kind": "marker",
+    "lngLat": [
+      -77.036543,
+      38.895037
+    ],
+    "title": "Dropped pin — Bykhaw District",
+    "properties": {
+      "text": "Near Bykhaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701317
+  },
+  {
+    "id": "fpv-94",
+    "kind": "marker",
+    "lngLat": [
+      -77.036543,
+      38.895037
+    ],
+    "title": "Dropped pin — Bykhaw District",
+    "properties": {
+      "text": "Near Bykhaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701318
+  },
+  {
+    "id": "fpv-95",
+    "kind": "marker",
+    "lngLat": [
+      -77.036543,
+      38.895037
+    ],
+    "title": "Dropped pin — Bykhaw District",
+    "properties": {
+      "text": "Near Bykhaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701319
+  },
+  {
+    "id": "fpv-96",
+    "kind": "marker",
+    "lngLat": [
+      27.42817,
+      53.94781
+    ],
+    "title": "Dropped pin — Minsk Region, 223028",
+    "properties": {
+      "text": "Near Minsk Region, 223028",
+      "approx": true
+    },
+    "createdAt": 1781888701320
+  },
+  {
+    "id": "fpv-97",
+    "kind": "marker",
+    "lngLat": [
+      27.316916666666668,
+      53.96911111111111
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701321
+  },
+  {
+    "id": "fpv-98",
+    "kind": "marker",
+    "lngLat": [
+      19.300636,
+      52.12461
+    ],
+    "title": "Dropped pin — Laporovichi",
+    "properties": {
+      "text": "Near Laporovichi",
+      "approx": true
+    },
+    "createdAt": 1781888701322
+  },
+  {
+    "id": "fpv-99",
+    "kind": "marker",
+    "lngLat": [
+      123.728004,
+      12.569226
+    ],
+    "title": "Dropped pin — Klichaw District",
+    "properties": {
+      "text": "Near Klichaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701323
+  },
+  {
+    "id": "fpv-100",
+    "kind": "marker",
+    "lngLat": [
+      30.602759,
+      53.454597
+    ],
+    "title": "Dropped pin — Khachinka",
+    "properties": {
+      "text": "Near Khachinka",
+      "approx": true
+    },
+    "createdAt": 1781888701324
+  },
+  {
+    "id": "fpv-101",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701325
+  },
+  {
+    "id": "fpv-102",
+    "kind": "marker",
+    "lngLat": [
+      27.230966,
+      54.031214
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701326
+  },
+  {
+    "id": "fpv-103",
+    "kind": "marker",
+    "lngLat": [
+      27.591021,
+      53.609904
+    ],
+    "title": "Dropped pin — Minsk Region",
+    "properties": {
+      "text": "Near Minsk Region",
+      "approx": true
+    },
+    "createdAt": 1781888701327
+  },
+  {
+    "id": "fpv-104",
+    "kind": "marker",
+    "lngLat": [
+      -77.036543,
+      38.895037
+    ],
+    "title": "Dropped pin — Bykhaw District",
+    "properties": {
+      "text": "Near Bykhaw District",
+      "approx": true
+    },
+    "createdAt": 1781888701328
+  },
+  {
+    "id": "fpv-105",
+    "kind": "marker",
+    "lngLat": [
+      30.452388888888887,
+      53.33997222222222
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701329
+  },
+  {
+    "id": "fpv-106",
+    "kind": "marker",
+    "lngLat": [
+      30.36863888888889,
+      53.331388888888895
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701330
+  },
+  {
+    "id": "fpv-107",
+    "kind": "marker",
+    "lngLat": [
+      26.921946,
+      54.453753
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701331
+  },
+  {
+    "id": "fpv-108",
+    "kind": "marker",
+    "lngLat": [
+      26.692285,
+      53.976065
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701332
+  },
+  {
+    "id": "fpv-109",
+    "kind": "marker",
+    "lngLat": [
+      27.349467,
+      54.060721
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701333
+  },
+  {
+    "id": "fpv-110",
+    "kind": "marker",
+    "lngLat": [
+      30.383972222222223,
+      53.33658333333334
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701334
+  },
+  {
+    "id": "fpv-111",
+    "kind": "marker",
+    "lngLat": [
+      27.311944444444446,
+      54.038666666666664
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701335
+  },
+  {
+    "id": "fpv-112",
+    "kind": "marker",
+    "lngLat": [
+      27.338749999999997,
+      54.049749999999996
+    ],
+    "title": "FPV spot",
+    "properties": {},
+    "createdAt": 1781888701336
+  }
+]

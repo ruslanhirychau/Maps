@@ -1,0 +1,875 @@
+[
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      19.23502777777778,
+      49.536027777777775
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Szlak pieszy niebieski",
+    "props": {
+      "text": "Near Szlak pieszy niebieski"
+    },
+    "geo": "Szlak pieszy niebieski"
+  },
+  {
+    "title": "Hala Redykalna",
+    "props": {
+      "text": "Tourist attraction"
+    },
+    "geo": "Hala Redykalna, 4.8(138), Tourist attraction"
+  },
+  {
+    "title": "Parking",
+    "lngLat": [
+      20.8755912,
+      52.2988077
+    ],
+    "props": {
+      "text": "Rękopis 43a",
+      "rating": 5,
+      "url": "http://maps.google.com/?q=R%C4%99kopis+43a,+01-936+Warszawa&ftid=0x471eb5fbacdd36b5:0x44eb8d43df1bcca4"
+    }
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      20.995527777777777,
+      52.27697222222222
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Gmina Biskupiec",
+    "props": {
+      "text": "Near Gmina Biskupiec"
+    },
+    "geo": "Gmina Biskupiec"
+  },
+  {
+    "title": "Rębkowska 14",
+    "props": {
+      "text": "04-375 Warszawa"
+    },
+    "geo": "Rębkowska 14, 04-375 Warszawa"
+  },
+  {
+    "title": "Dropped pin — Polana Szymoszkowa 2, 34-500 Zakopane",
+    "props": {
+      "text": "Near Polana Szymoszkowa 2, 34-500 Zakopane"
+    },
+    "geo": "Polana Szymoszkowa 2, 34-500 Zakopane"
+  },
+  {
+    "title": "Compensa Concert Hall",
+    "props": {
+      "text": "Concert hall"
+    },
+    "geo": "Compensa Concert Hall, 4.3(4,542), Concert hall"
+  },
+  {
+    "title": "Mińska 65",
+    "props": {
+      "text": "Permanently closed"
+    },
+    "geo": "Mińska 65, 4.2(1,075), Permanently closed"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      21.0365,
+      52.243027777777776
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      21.047027777777778,
+      52.24358333333333
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      21.03333333333333,
+      52.23902777777778
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      19.311805555555555,
+      54.35911111111111
+    ],
+    "props": {}
+  },
+  {
+    "title": "Silesia Ring - Kamień Śląski",
+    "props": {
+      "text": "Racecourse"
+    },
+    "geo": "Silesia Ring - Kamień Śląski, 4.8(1,950), Racecourse"
+  },
+  {
+    "title": "Rope Park Warsaw",
+    "props": {
+      "text": "Amusement park ride"
+    },
+    "geo": "Rope Park Warsaw, 4.5(632), Amusement park ride"
+  },
+  {
+    "title": "Dropped pin — Praga, Warsaw",
+    "props": {
+      "text": "Near Praga, Warsaw"
+    },
+    "geo": "Praga, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Praga, Warsaw",
+    "props": {
+      "text": "Near Praga, Warsaw"
+    },
+    "geo": "Praga, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Gmina Sztutowo",
+    "props": {
+      "text": "Near Gmina Sztutowo"
+    },
+    "geo": "Gmina Sztutowo"
+  },
+  {
+    "title": "Dropped pin — Nowy Dwór Gdański County",
+    "props": {
+      "text": "Near Nowy Dwór Gdański County"
+    },
+    "geo": "Nowy Dwór Gdański County"
+  },
+  {
+    "title": "Dropped pin — Nowy Dwór Gdański County",
+    "props": {
+      "text": "Near Nowy Dwór Gdański County"
+    },
+    "geo": "Nowy Dwór Gdański County"
+  },
+  {
+    "title": "Dropped pin — Warsaw New Town, 01-001 Warsaw",
+    "props": {
+      "text": "Near Warsaw New Town, 01-001 Warsaw"
+    },
+    "geo": "Warsaw New Town, 01-001 Warsaw"
+  },
+  {
+    "title": "Dropped pin — Górczewska 212/226, 01-460 Warszawa",
+    "props": {
+      "text": "Near Górczewska 212/226, 01-460 Warszawa"
+    },
+    "geo": "Górczewska 212/226, 01-460 Warszawa"
+  },
+  {
+    "title": "Dropped pin — Odolany, Warsaw",
+    "props": {
+      "text": "Near Odolany, Warsaw"
+    },
+    "geo": "Odolany, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Elekcyjna, Warszawa",
+    "props": {
+      "text": "Near Elekcyjna, Warszawa"
+    },
+    "geo": "Elekcyjna, Warszawa"
+  },
+  {
+    "title": "Dropped pin — plac Hirszfelda 52, 52-007 Wrocław",
+    "props": {
+      "text": "Near plac Hirszfelda 52, 52-007 Wrocław"
+    },
+    "geo": "plac Hirszfelda 52, 52-007 Wrocław"
+  },
+  {
+    "title": "Dropped pin — Lower Silesian Voivodeship",
+    "props": {
+      "text": "Near Lower Silesian Voivodeship"
+    },
+    "geo": "Lower Silesian Voivodeship"
+  },
+  {
+    "title": "Dropped pin — Frycza-Modrzewskiego, 52-007 Wrocław",
+    "props": {
+      "text": "Near Frycza-Modrzewskiego, 52-007 Wrocław"
+    },
+    "geo": "Frycza-Modrzewskiego, 52-007 Wrocław"
+  },
+  {
+    "title": "Dropped pin — Łeba",
+    "props": {
+      "text": "Near Łeba"
+    },
+    "geo": "Łeba"
+  },
+  {
+    "title": "Dropped pin — Augustówka, Warsaw",
+    "props": {
+      "text": "Near Augustówka, Warsaw"
+    },
+    "geo": "Augustówka, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Bella Dent Izabela Staniek - Laboratorium Techniki Dentystycznej, Grzybowska 9, 00-132 Warszawa",
+    "props": {
+      "text": "Near Bella Dent Izabela Staniek - Laboratorium Techniki Dentystycznej, Grzybowska 9, 00-132 Warszawa"
+    },
+    "geo": "Bella Dent Izabela Staniek - Laboratorium Techniki Dentystycznej, Grzybowska 9, 00-132 Warszawa"
+  },
+  {
+    "title": "Dropped pin — Śródmieście Północne, Warsaw, Warsaw",
+    "props": {
+      "text": "Near Śródmieście Północne, Warsaw, Warsaw"
+    },
+    "geo": "Śródmieście Północne, Warsaw, Warsaw"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      19.967055555555554,
+      49.29877777777778
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Odolany, Warsaw",
+    "props": {
+      "text": "Near Odolany, Warsaw"
+    },
+    "geo": "Odolany, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Gdańsk",
+    "props": {
+      "text": "Near Gdańsk"
+    },
+    "geo": "Gdańsk"
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "Dropped pin — Gdańsk",
+    "props": {
+      "text": "Near Gdańsk"
+    },
+    "geo": "Gdańsk"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      20.872055555555555,
+      52.601083333333335
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Ulrychów, Warsaw",
+    "props": {
+      "text": "Near Ulrychów, Warsaw"
+    },
+    "geo": "Ulrychów, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Gmina Mały Płock",
+    "props": {
+      "text": "Near Gmina Mały Płock"
+    },
+    "geo": "Gmina Mały Płock"
+  },
+  {
+    "title": "Dropped pin — Plaża Gminna, Stare Sady 18B, 11-730 Stare Sady",
+    "props": {
+      "text": "Near Plaża Gminna, Stare Sady 18B, 11-730 Stare Sady"
+    },
+    "geo": "Plaża Gminna, Stare Sady 18B, 11-730 Stare Sady"
+  },
+  {
+    "title": "Dropped pin — DW567, 09-451",
+    "props": {
+      "text": "Near DW567, 09-451"
+    },
+    "geo": "DW567, 09-451"
+  },
+  {
+    "title": "Dropped pin — Parking lot, Połczyńska 4, 01-001 Warszawa",
+    "props": {
+      "text": "Near Parking lot, Połczyńska 4, 01-001 Warszawa"
+    },
+    "geo": "Parking lot, Połczyńska 4, 01-001 Warszawa"
+  },
+  {
+    "title": "Dropped pin — Gmina Podgórzyn",
+    "props": {
+      "text": "Near Gmina Podgórzyn"
+    },
+    "geo": "Gmina Podgórzyn"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      20.927055555555558,
+      51.87972222222222
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Błonia Wilanowskie, Warsaw",
+    "props": {
+      "text": "Near Błonia Wilanowskie, Warsaw"
+    },
+    "geo": "Błonia Wilanowskie, Warsaw"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      20.208135,
+      52.047068
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Gmina Łomianki",
+    "props": {
+      "text": "Near Gmina Łomianki"
+    },
+    "geo": "Gmina Łomianki"
+  },
+  {
+    "title": "Dropped pin — 05-092 Łomianki Dolne",
+    "props": {
+      "text": "Near 05-092 Łomianki Dolne"
+    },
+    "geo": "05-092 Łomianki Dolne"
+  },
+  {
+    "title": "Dropped pin — Ludwinów, Kraków",
+    "props": {
+      "text": "Near Ludwinów, Kraków"
+    },
+    "geo": "Ludwinów, Kraków"
+  },
+  {
+    "title": "Dropped pin — Kraków Old Town, Kraków",
+    "props": {
+      "text": "Near Kraków Old Town, Kraków"
+    },
+    "geo": "Kraków Old Town, Kraków"
+  },
+  {
+    "title": "Dropped pin — Cytadela Twierdzy Kraków, 33-332 Kraków",
+    "props": {
+      "text": "Near Cytadela Twierdzy Kraków, 33-332 Kraków"
+    },
+    "geo": "Cytadela Twierdzy Kraków, 33-332 Kraków"
+  },
+  {
+    "title": "Dropped pin — Lodowisko Krakowskie Błonia, Aleja Marszałka Ferdynanda Focha, 31-119 Kraków",
+    "props": {
+      "text": "Near Lodowisko Krakowskie Błonia, Aleja Marszałka Ferdynanda Focha, 31-119 Kraków"
+    },
+    "geo": "Lodowisko Krakowskie Błonia, Aleja Marszałka Ferdynanda Focha, 31-119 Kraków"
+  },
+  {
+    "title": "Dropped pin — Krowodrza, 30-059 Kraków",
+    "props": {
+      "text": "Near Krowodrza, 30-059 Kraków"
+    },
+    "geo": "Krowodrza, 30-059 Kraków"
+  },
+  {
+    "title": "Dropped pin — Gmina Czosnów",
+    "props": {
+      "text": "Near Gmina Czosnów"
+    },
+    "geo": "Gmina Czosnów"
+  },
+  {
+    "title": "Dropped pin — Gmina Kościelisko",
+    "props": {
+      "text": "Near Gmina Kościelisko"
+    },
+    "geo": "Gmina Kościelisko"
+  },
+  {
+    "title": "Dropped pin — Kościelisko",
+    "props": {
+      "text": "Near Kościelisko"
+    },
+    "geo": "Kościelisko"
+  },
+  {
+    "title": "Dropped pin — Gmina Kościelisko",
+    "props": {
+      "text": "Near Gmina Kościelisko"
+    },
+    "geo": "Gmina Kościelisko"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      21.08511111111111,
+      52.500083333333336
+    ],
+    "props": {}
+  },
+  {
+    "title": "Motocross",
+    "props": {
+      "text": "Place no longer exists"
+    },
+    "geo": "Motocross, Place no longer exists"
+  },
+  {
+    "title": "Dropped pin — Seafront Promenade, Batumi, Georgia",
+    "props": {
+      "text": "Near Seafront Promenade, Batumi, Georgia"
+    },
+    "geo": "Seafront Promenade, Batumi, Georgia"
+  },
+  {
+    "title": "Dropped pin — Samegrelo-Zemo Svaneti, Georgia",
+    "props": {
+      "text": "Near Samegrelo-Zemo Svaneti, Georgia"
+    },
+    "geo": "Samegrelo-Zemo Svaneti, Georgia"
+  },
+  {
+    "title": "Dropped pin — Europe",
+    "props": {
+      "text": "Near Europe"
+    },
+    "geo": "Europe"
+  },
+  {
+    "title": "Dropped pin — Gmina Góra Kalwaria",
+    "props": {
+      "text": "Near Gmina Góra Kalwaria"
+    },
+    "geo": "Gmina Góra Kalwaria"
+  },
+  {
+    "title": "Dropped pin — Błonia Wilanowskie, Warsaw",
+    "props": {
+      "text": "Near Błonia Wilanowskie, Warsaw"
+    },
+    "geo": "Błonia Wilanowskie, Warsaw"
+  },
+  {
+    "title": "Dropped pin — Gmina Radzymin",
+    "props": {
+      "text": "Near Gmina Radzymin"
+    },
+    "geo": "Gmina Radzymin"
+  },
+  {
+    "title": "Dropped pin — Tskaltubo, Georgia",
+    "props": {
+      "text": "Near Tskaltubo, Georgia"
+    },
+    "geo": "Tskaltubo, Georgia"
+  },
+  {
+    "title": "Dropped pin — Mtskheta-Mtianeti, Georgia",
+    "props": {
+      "text": "Near Mtskheta-Mtianeti, Georgia"
+    },
+    "geo": "Mtskheta-Mtianeti, Georgia"
+  },
+  {
+    "title": "Dropped pin — Georgia",
+    "props": {
+      "text": "Near Georgia"
+    },
+    "geo": "Georgia"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.115805555555557,
+      53.96280555555556
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "Dropped pin — Marki",
+    "props": {
+      "text": "Near Marki"
+    },
+    "geo": "Marki"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.950765,
+      53.95458
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Dzyarzhynsk District",
+    "props": {
+      "text": "Near Dzyarzhynsk District"
+    },
+    "geo": "Dzyarzhynsk District"
+  },
+  {
+    "title": "Dropped pin — Dzyarzhynsk District",
+    "props": {
+      "text": "Near Dzyarzhynsk District"
+    },
+    "geo": "Dzyarzhynsk District"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.27322222222222,
+      53.91936111111111
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.27497222222222,
+      53.9165
+    ],
+    "props": {}
+  },
+  {
+    "title": "Belarus",
+    "props": {},
+    "geo": "Belarus"
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.33225,
+      53.96163888888889
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.969111111111108,
+      53.98113888888889
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.44611111111111,
+      54.94136111111111
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.451833333333333,
+      54.952111111111115
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Chasovnya, Lukovets",
+    "props": {
+      "text": "Near Chasovnya, Lukovets"
+    },
+    "geo": "Chasovnya, Lukovets"
+  },
+  {
+    "title": "Dropped pin — Lobkovichi",
+    "props": {
+      "text": "Near Lobkovichi"
+    },
+    "geo": "Lobkovichi"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      30.350166666666667,
+      53.50336111111111
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Chyhirynka Water Reservoir",
+    "props": {
+      "text": "Near Chyhirynka Water Reservoir"
+    },
+    "geo": "Chyhirynka Water Reservoir"
+  },
+  {
+    "title": "Dropped pin — Bykhaw District",
+    "props": {
+      "text": "Near Bykhaw District"
+    },
+    "geo": "Bykhaw District"
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.4665,
+      53.95408333333334
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.455027777777776,
+      53.95480555555556
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.389499999999998,
+      53.958444444444446
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.628444444444444,
+      53.80888888888889
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "Dropped pin — Bykhaw District",
+    "props": {
+      "text": "Near Bykhaw District"
+    },
+    "geo": "Bykhaw District"
+  },
+  {
+    "title": "Dropped pin — Bykhaw District",
+    "props": {
+      "text": "Near Bykhaw District"
+    },
+    "geo": "Bykhaw District"
+  },
+  {
+    "title": "Dropped pin — Bykhaw District",
+    "props": {
+      "text": "Near Bykhaw District"
+    },
+    "geo": "Bykhaw District"
+  },
+  {
+    "title": "Dropped pin — Minsk Region, 223028",
+    "props": {
+      "text": "Near Minsk Region, 223028"
+    },
+    "geo": "Minsk Region, 223028"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.316916666666668,
+      53.96911111111111
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Laporovichi",
+    "props": {
+      "text": "Near Laporovichi"
+    },
+    "geo": "Laporovichi"
+  },
+  {
+    "title": "Dropped pin — Klichaw District",
+    "props": {
+      "text": "Near Klichaw District"
+    },
+    "geo": "Klichaw District"
+  },
+  {
+    "title": "Dropped pin — Khachinka",
+    "props": {
+      "text": "Near Khachinka"
+    },
+    "geo": "Khachinka"
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.230966,
+      54.031214
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin — Minsk Region",
+    "props": {
+      "text": "Near Minsk Region"
+    },
+    "geo": "Minsk Region"
+  },
+  {
+    "title": "Dropped pin — Bykhaw District",
+    "props": {
+      "text": "Near Bykhaw District"
+    },
+    "geo": "Bykhaw District"
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      30.452388888888887,
+      53.33997222222222
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      30.36863888888889,
+      53.331388888888895
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.921946,
+      54.453753
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      26.692285,
+      53.976065
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.349467,
+      54.060721
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      30.383972222222223,
+      53.33658333333334
+    ],
+    "props": {}
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "Dropped pin",
+    "props": {},
+    "geo": null
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.311944444444446,
+      54.038666666666664
+    ],
+    "props": {}
+  },
+  {
+    "title": "FPV spot",
+    "lngLat": [
+      27.338749999999997,
+      54.049749999999996
+    ],
+    "props": {}
+  }
+]
